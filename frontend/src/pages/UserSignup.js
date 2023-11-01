@@ -5,6 +5,7 @@ import "../styles/UserSignup.css";
 
 const UserSignup = () => {
     const [userdata, setuserdata] = useState({firstname: '', lastname: '', email:'',phoneNumber:0,password:'',confirmPassword:"",admin: false})
+    const [error, setError] = useState(null);
     console.log(userdata)
 
     function handlechange(event){
@@ -16,12 +17,32 @@ const UserSignup = () => {
           }
         } )
       }
+    
+    async function handleSubmit(event){
+        try{
+            event.preventDefault()
+            console.log("submitted")
+            console.log(userdata)
+            const response = await fetch('http://localhost:3000/api/users/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userdata)
+            })
 
-      function handleSubmit(event){
-        console.log("submitted")
-      }
-
-      return (
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+              } else {
+                console.log('Signup successful');
+                window.location.href = '/UserLogin';
+              }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    return (
         <div>
         <div className='container'>
           <div className="form-container">
