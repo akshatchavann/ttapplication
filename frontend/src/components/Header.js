@@ -13,10 +13,29 @@ const Header = () => {
           <img src={logo} alt="Website Logo" />
         </Link>
       </div>
-      <div className='nav-container'>
-        <Nav>
-        </Nav>
-      </div>
+      <div className="wrapper">
+            <div className="button-container">
+                <Link className="nav-link mx-4" to="/">
+                    <button type="button" className="home-button">
+                        Sign Out
+                    </button>
+                </Link>
+            </div>
+            <div className="button-container">
+                <Link className="nav-link mx-4" to="/Content">
+                    <button type="button" className="home-button">
+                        Home
+                    </button>
+                </Link>
+            </div>
+            <div className="button-container">
+                <Link className="nav-link mx-4" to="/Profile">
+                    <button type="button" className="home-button">
+                        Profile
+                    </button>
+                </Link>
+            </div>
+          </div>
     </header>
   );
 }
