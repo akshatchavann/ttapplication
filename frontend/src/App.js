@@ -8,6 +8,7 @@ import UserSignup from './pages/UserSignup.js';
 import UserLogin from './pages/UserLogin.js';
 import Content from './pages/Content';
 import Profile from './pages/Profile';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/Content" element={<Content />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/Admin" element={<Admin />} /> 
         </Routes>
       </BrowserRouter>
     </div>
