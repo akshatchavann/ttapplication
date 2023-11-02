@@ -5,6 +5,7 @@ import "../styles/UserLogin.css";
 
 const UserLogin = () => {
     const [userdata, setuserdata] = useState({email:'',password:''})
+    const [error, setError] = useState(null);
 
     function handlechange(event){
         const {name,value} = event.target 
@@ -19,7 +20,27 @@ const UserLogin = () => {
     console.log(userdata)
 
     const handleSubmit = async (e) => {
-        console.log("submitted")
+        try {
+            e.preventDefault()
+            console.log(userdata)
+            const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userdata)
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+              } else {
+                console.log('Login successful');
+                window.location.href = '/Content';
+              }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
