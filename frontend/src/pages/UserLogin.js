@@ -36,7 +36,7 @@ const UserLogin = () => {
                 setError(errorData.message);
               } else {
                 console.log('Login successful');
-                window.location.href = '/Content';
+                window.location.href = `/Content/${userdata.email}`;
               }
         } catch (error) {
             console.log(error);

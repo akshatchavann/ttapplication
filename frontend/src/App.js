@@ -18,8 +18,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/UserSignup" element={<UserSignup />} />
           <Route path="/UserLogin" element={<UserLogin />} />
-          <Route path="/Content" element={<Content />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Content/:email" element={<Content />} />
+          <Route path="/Profile/:email" element={<Profile />} />
           <Route path="/Admin" element={<Admin />} /> 
         </Routes>
       </BrowserRouter>
