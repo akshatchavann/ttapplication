@@ -12,6 +12,7 @@ router.post('/signup', usersControllers.signup);
 
 router.post('/login', usersControllers.login);
 
+router.put('/update/:uemail', usersControllers.updateUserbyID);
 
 
 

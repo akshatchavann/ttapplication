@@ -50,7 +50,7 @@ const signup = async (req, res, next) => {
       email,
       phoneNumber,
       password,
-      QnA: {},
+      QnA: {"dummy": "dummy"},
     });
   
     try {
@@ -92,8 +92,42 @@ const login = async (req, res, next) => {
 
     res.json({message: 'Logged in!'});
 };
+
+
+const updateUserbyID = async (req, res, next) => {
+    const uemail = req.params.uemail;
+    const { ratings } = req.body;
+  
+    try {
+      // Find the user by email or some unique identifier
+      const user = await User.findOne({ email: uemail });
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Convert ratings to a Map
+      const ratingsMap = new Map(Object.entries(ratings));
+  
+      // Update the QnA map using the ratings data
+      for (const [questionId, answer] of ratingsMap) {
+        // Set the question and answer pair in the QnA map
+        user.QnA.set(questionId, answer);
+      }
+  
+      // Save the updated user data
+      await user.save();
+  
+      res.json({ message: 'User QnA updated successfully', user: user });
+    } catch (error) {
+      // Handle any errors that may occur during the process
+      next(error);
+    }
+  };
+  
   
 
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+exports.updateUserbyID = updateUserbyID;

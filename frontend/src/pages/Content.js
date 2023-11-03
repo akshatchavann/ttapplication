@@ -35,7 +35,28 @@ const Content = () => {
       }, []);
 
     const handleSubmitRatings = async (e) => {
-        console.log("submitt");
+        e.preventDefault();
+    
+        try {
+            const response = await fetch(`http://localhost:3000/api/users/update/${email}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ratings, // Include the ratings object
+                }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+            } else {
+                console.log('Ratings submitted successfully');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleRatingChange = (questionId, value) => {
