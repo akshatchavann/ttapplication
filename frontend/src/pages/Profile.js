@@ -48,9 +48,8 @@ const Profile = () => {
                     <div><strong>Email:</strong> {ProfileInformation && ProfileInformation.email}</div>
                     <div><strong>Phone Number:</strong> {ProfileInformation && ProfileInformation.phoneNumber}</div>
                 </div>
+
         </div>
-
-
         </div>
     )
 }
