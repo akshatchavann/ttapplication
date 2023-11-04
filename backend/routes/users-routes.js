@@ -14,6 +14,8 @@ router.post('/login', usersControllers.login);
 
 router.put('/update/:uemail', usersControllers.updateUserbyID);
 
+router.get('/:uemail', usersControllers.getUserbyEmail);
+
 
 
 module.exports = router;

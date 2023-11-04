@@ -124,6 +124,27 @@ const updateUserbyID = async (req, res, next) => {
       next(error);
     }
   };
+
+
+const getUserbyEmail = async (req, res, next) => {
+    const email = req.params.uemail;
+
+    try {
+        const user = await User.findOne({ email });
+        
+        if (!user) {
+            const error = new HttpError('Could not find a user for the provided email.', 404); // 404 is for resource not found
+            return next(error);
+        }
+
+        res.json({ user: user.toObject({ getters: true }) });
+    } catch (err) {
+        const error = new HttpError('Something went wrong, could not find a user.', 500); // 500 is for a server error
+        return next(error);
+    }
+}
+
+
   
   
 
@@ -131,3 +152,4 @@ exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
 exports.updateUserbyID = updateUserbyID;
+exports.getUserbyEmail = getUserbyEmail;  

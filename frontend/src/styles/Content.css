@@ -1,0 +1,16 @@
+.rating-slider-container {
+    display: flex;
+    align-items: center;
+}
+
+.rating-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.rating-labels span {
+    flex: 1;
+    text-align: center;
+}

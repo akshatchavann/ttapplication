@@ -71,40 +71,43 @@ const Content = () => {
 
     console.log(ratings);
     return (
-
         <div>
-            <Header />
-            <div>Content goes here</div>
-            <div>
-                <h2>Loaded Questions</h2>
-                {loadedQuestions && loadedQuestions.length > 0 ? (
-                    <form onSubmit={handleSubmitRatings}>
-                        {loadedQuestions.map((question, index) => (
-                            <div key={index} className="question">
-                                <div>{question.question}</div>
-                                <select
-                                    name={`rating-${question._id}`}
-                                    onChange={e => handleRatingChange(question._id, e.target.value)}
-                                    value={ratings[question._id] || '1'}
-                                >
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                </select>
+        <Header />
+        <div>Content goes here</div>
+        <div>
+            <h2>Loaded Questions</h2>
+            {loadedQuestions && loadedQuestions.length > 0 ? (
+                <form onSubmit={handleSubmitRatings}>
+                    {loadedQuestions.map((question, index) => (
+                        <div key={index} className="question">
+                            <div>{question.question}</div>
+                            <input
+                                type="range"
+                                min="1"
+                                max="7"
+                                name={`rating-${question._id}`}
+                                onChange={e => handleRatingChange(question._id, e.target.value)}
+                                value={ratings[question._id] || '1'}
+                            />
+                            <div>
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
                             </div>
-                        ))}
-                        <button type="submit" >Submit Ratings</button>
-                    </form>
-                ) : (
-                    <p>No questions available.</p>
-                )}
-            </div>
-
+                        </div>
+                    ))}
+                    <button type="submit">Submit Ratings</button>
+                </form>
+            ) : (
+                <p>No questions available.</p>
+            )}
         </div>
+    </div>
+    
     );
 };
 
