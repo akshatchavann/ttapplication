@@ -96,29 +96,38 @@ const login = async (req, res, next) => {
 
 
 const updateUserbyID = async (req, res, next) => {
-    const uemail = req.params.uemail;
-    const { qs, ans } = req.body;
-  
-    try {
-      // Find the user by email or some unique identifier
-      const user = await User.findOne({ email: uemail });
-  
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
+  const uemail = req.params.uemail;
+  const { qs, ans } = req.body;
+
+  try {
+    // Find the user by email or some unique identifier
+    const user = await User.findOne({ email: uemail });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the question already exists in the user's questions array
+    const questionIndex = user.questions.findIndex((question) => question === qs);
+
+    if (questionIndex !== -1) {
+      // If the question exists, update its corresponding answer
+      user.answers[questionIndex] = ans;
+    } else {
+      // If the question doesn't exist, add it to the user's questions and answers arrays
       user.questions.push(qs);
       user.answers.push(ans);
-  
-      // Save the updated user data
-      await user.save();
-  
-      res.json({ message: 'User QnA updated successfully', user: user });
-    } catch (error) {
-      // Handle any errors that may occur during the process
-      next(error);
     }
-  };
+
+    // Save the updated user data
+    await user.save();
+
+    res.json({ message: 'User QnA updated successfully', user: user });
+  } catch (error) {
+    // Handle any errors that may occur during the process
+    next(error);
+  }
+};
 
 
 const getUserbyEmail = async (req, res, next) => {
