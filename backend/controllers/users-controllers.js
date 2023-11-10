@@ -50,7 +50,8 @@ const signup = async (req, res, next) => {
       email,
       phoneNumber,
       password,
-      QnA: {"dummy": "dummy"},
+      questions: "happy",
+      answers: "sad"
     });
   
     try {
@@ -96,7 +97,7 @@ const login = async (req, res, next) => {
 
 const updateUserbyID = async (req, res, next) => {
     const uemail = req.params.uemail;
-    const { ratings } = req.body;
+    const { qs, ans } = req.body;
   
     try {
       // Find the user by email or some unique identifier
@@ -106,14 +107,8 @@ const updateUserbyID = async (req, res, next) => {
         return res.status(404).json({ message: 'User not found' });
       }
   
-      // Convert ratings to a Map
-      const ratingsMap = new Map(Object.entries(ratings));
-  
-      // Update the QnA map using the ratings data
-      for (const [questionId, answer] of ratingsMap) {
-        // Set the question and answer pair in the QnA map
-        user.QnA.set(questionId, answer);
-      }
+      user.questions.push(qs);
+      user.answers.push(ans);
   
       // Save the updated user data
       await user.save();

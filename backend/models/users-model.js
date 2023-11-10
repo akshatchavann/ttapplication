@@ -8,10 +8,8 @@ const userSchema = new Schema({
     phoneNumber: { type: Number, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true, minlength: 6 },
-    QnA: {
-        type: Map,  // Define QnA as a map
-        of: String  // Specify that the values will be strings
-    }
+    questions: { type: Array, required: false },
+    answers: { type: Array, required: false },
 });
 
 module.exports = mongoose.model('User', userSchema);

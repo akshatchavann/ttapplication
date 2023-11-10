@@ -12,7 +12,7 @@ const Content = () => {
     const { email } = useParams();
     const [loadedQuestions, setLoadedQuestions] = useState();
     const [error, setError] = useState(null);
-    const [ratings, setRatings] = useState({});
+    const [ratings, setRatings] = useState({ qs: "", ans: "" });
 
     // Fetch the questions from the backend
     useEffect(() => {
@@ -43,9 +43,9 @@ const Content = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
+                body: JSON.stringify(
                     ratings, // Include the ratings object
-                }),
+                ),
             });
     
             if (!response.ok) {
@@ -59,11 +59,11 @@ const Content = () => {
         }
     };
 
-    const handleRatingChange = (questionId, value) => {
+    const handleRatingChange = (question, value) => {
         setRatings(prevRatings => {
             return {
-                ...prevRatings,
-                [questionId]: value
+                qs: question,
+                ans: value
             }
         });
     }
@@ -85,9 +85,9 @@ const Content = () => {
                                 type="range"
                                 min="1"
                                 max="7"
-                                name={`rating-${question._id}`}
-                                onChange={e => handleRatingChange(question._id, e.target.value)}
-                                value={ratings[question._id] || '1'}
+                                name={`rating-${question.question}`}
+                                onChange={e => handleRatingChange(question.question, e.target.value)}
+                                value={ratings[question.question] || '1'}
                             />
                             <div>
                                 <span>1</span>
