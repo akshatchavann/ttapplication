@@ -50,8 +50,8 @@ const signup = async (req, res, next) => {
       email,
       phoneNumber,
       password,
-      questions: "happy",
-      answers: "sad"
+      questions: [],
+      answers: []
     });
   
     try {
