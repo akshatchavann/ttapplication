@@ -12,7 +12,7 @@ const Content = () => {
     const { email } = useParams();
     const [loadedQuestions, setLoadedQuestions] = useState();
     const [error, setError] = useState(null);
-    const [ratings, setRatings] = useState({ qs: "", ans: "" });
+    const [ratings, setRatings] = useState({});
 
     // Fetch the questions from the backend
     useEffect(() => {
@@ -87,7 +87,7 @@ const Content = () => {
                                 max="7"
                                 name={`rating-${question.question}`}
                                 onChange={e => handleRatingChange(question.question, e.target.value)}
-                                value={ratings[question.question] || '1'}
+                                value={ratings.ans || '1'}
                             />
                             <div>
                                 <span>1</span>
