@@ -47,6 +47,16 @@ const Profile = () => {
                     <div><strong>Last Name:</strong> {ProfileInformation && ProfileInformation.lastname}</div>
                     <div><strong>Email:</strong> {ProfileInformation && ProfileInformation.email}</div>
                     <div><strong>Phone Number:</strong> {ProfileInformation && ProfileInformation.phoneNumber}</div>
+                    <div>
+                    <h2>Questions and Answers</h2>
+                    {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => (
+                        <div key={index}>
+                            <p><strong>Question:</strong> {question}</p>
+                            <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index]}</p>
+                        </div>
+                    ))}
+                </div>
+
                 </div>
 
         </div>
