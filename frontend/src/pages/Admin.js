@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Admin = () => {
-  const [formData, setFormData] = useState({ question: '', category: '' });
+  const [formData, setFormData] = useState({ question: '', category: '', tweetURL: '' });
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
@@ -26,12 +26,13 @@ const Admin = () => {
         const errorData = await response.json();
         setError(errorData.message);
       } else {
-        console.log('Signup successful');
+        console.log('Question submitted successfully');
       }
     } catch (error) {
       console.log(error);
     }
   }
+  console.log(formData);
 
   return (
     <div>
@@ -49,6 +50,13 @@ const Admin = () => {
           name="category"
           placeholder="Category"
           value={formData.category}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="tweetURL"
+          placeholder="Tweet URL"
+          value={formData.tweetURL}
           onChange={handleInputChange}
         />
         <button type="submit">Submit</button>

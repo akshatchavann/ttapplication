@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 const Content = () => {
     // Retrieve the 'id' parameter from the URL
     const { email } = useParams();
-    const [loadedQuestions, setLoadedQuestions] = useState();
+    const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
     const [ratings, setRatings] = useState({});
 
@@ -27,7 +27,13 @@ const Content = () => {
             }
     
             const lastQuestion = responseData.questions[responseData.questions.length - 1];
-            setLoadedQuestions([lastQuestion]); // Set it as an array with the last question
+            setLoadedQuestion([lastQuestion]); // Set it as an array with the last question
+            setTimeout(() => {
+                if (window.twttr) {
+                    console.log('twttr is loaded');
+                    window.twttr.widgets.load();
+                }
+            }, 1000);
           } catch (error) {
             setError(error.message);
           }
@@ -60,8 +66,7 @@ const Content = () => {
             console.error(error);
         }
     
-        try {
-    
+        try { 
             // Second PUT request to update question ratings
             const questionResponse = await fetch(`http://localhost:3000/api/questions/update`, {
                 method: 'PUT',
@@ -98,18 +103,20 @@ const Content = () => {
         });
     }
 
-
-    console.log(ratings);
+    console.log(loadedQuestion)
     return (
         <div>
         <Header />
         <div>Content goes here</div>
         <div>
             <h2>Loaded Questions</h2>
-            {loadedQuestions && loadedQuestions.length > 0 ? (
+            {loadedQuestion && loadedQuestion.length > 0 ? (
                 <form onSubmit={handleSubmitRatings}>
-                    {loadedQuestions.map((question, index) => (
+                    {loadedQuestion.map((question, index) => (
                         <div key={index} className="question">
+                            <blockquote className="twitter-tweet">
+                                <a href={question.tweetURL}></a>
+                            </blockquote>
                             <div>{question.question}</div>
                             <input
                                 type="range"

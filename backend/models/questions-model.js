@@ -5,6 +5,7 @@ const questionSchema = new Schema({
     question: { type: String, required: true },
     category: { type: String, required: true },
     answers: { type: Array, required: true },
+    tweetURL: { type: String, required: true },
 });
 
 
