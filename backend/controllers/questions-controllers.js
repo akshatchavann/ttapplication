@@ -33,5 +33,32 @@ const createQuestion = async (req, res, next) => {
     }
 };
 
+const updateQuestionbyID = async (req, res, next) => {
+    const { id, ans } = req.body;
+  
+    try {
+      // Find the question by qid in the questions collection
+      const question = await Question.findOne({ _id: id });
+  
+      if (!question) {
+        return res.status(404).json({ message: 'Question not found' });
+      }
+  
+      // Now you have the specific question object
+      // Update the question object with the answer
+      question.answers.push(ans);
+  
+      // Save the updated question object
+      await question.save();
+  
+      res.json({ message: 'Answer added to the question', question });
+    } catch (error) {
+      // Handle any errors that may occur during the process
+      next(error);
+    }
+  };
+  
+
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
+exports.updateQuestionbyID = updateQuestionbyID;

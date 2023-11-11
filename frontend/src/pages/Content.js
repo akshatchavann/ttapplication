@@ -18,11 +18,11 @@ const Content = () => {
     useEffect(() => {
         const sendRequest = async () => {
           try {
-            const response = await fetch('http://localhost:3000/api/questions');
+            const Userresponse = await fetch('http://localhost:3000/api/questions');
     
-            const responseData = await response.json();
+            const responseData = await Userresponse.json();
     
-            if (!response.ok) {
+            if (!Userresponse.ok) {
               throw new Error(responseData.message);
             }
     
@@ -33,35 +33,64 @@ const Content = () => {
         };
         sendRequest();
       }, []);
-
-    const handleSubmitRatings = async (e) => {
+    
+      const handleSubmitRatings = async (e) => {
         e.preventDefault();
     
         try {
-            const response = await fetch(`http://localhost:3000/api/users/update/${email}`, {
+            // First PUT request to update user ratings
+            const userResponse = await fetch(`http://localhost:3000/api/users/update/${email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(
-                    ratings, // Include the ratings object
+                    ratings, // Include the ratings object for users
                 ),
             });
     
-            if (!response.ok) {
-                const errorData = await response.json();
+            if (!userResponse.ok) {
+                const errorData = await userResponse.json();
                 setError(errorData.message);
             } else {
-                console.log('Ratings submitted successfully');
+                console.log('User ratings submitted successfully');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    
+        try {
+    
+            // Second PUT request to update question ratings
+            const questionResponse = await fetch(`http://localhost:3000/api/questions/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    ratings, // Include the ratings object for questions
+                ),
+            });
+    
+            if (!questionResponse.ok) {
+                const errorData = await questionResponse.json();
+                setError(errorData.message);
+            } else {
+                console.log('Question ratings submitted successfully');
             }
         } catch (error) {
             console.error(error);
         }
     };
+    
 
-    const handleRatingChange = (question, value) => {
+  
+
+
+    const handleRatingChange = (id, question, value) => {
         setRatings(prevRatings => {
             return {
+                id: id,
                 qs: question,
                 ans: value
             }
@@ -86,7 +115,7 @@ const Content = () => {
                                 min="1"
                                 max="7"
                                 name={`rating-${question.question}`}
-                                onChange={e => handleRatingChange(question.question, e.target.value)}
+                                onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
                                 value={ratings.ans || '1'}
                             />
                             <div>

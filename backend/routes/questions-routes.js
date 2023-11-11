@@ -9,4 +9,6 @@ router.get('/', questionsControllers.getQuestions);
 
 router.post('/create', questionsControllers.createQuestion);
 
+router.put('/update', questionsControllers.updateQuestionbyID);
+
 module.exports = router;
