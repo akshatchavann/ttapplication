@@ -26,7 +26,8 @@ const Content = () => {
               throw new Error(responseData.message);
             }
     
-            setLoadedQuestions(responseData.questions);
+            const lastQuestion = responseData.questions[responseData.questions.length - 1];
+            setLoadedQuestions([lastQuestion]); // Set it as an array with the last question
           } catch (error) {
             setError(error.message);
           }
