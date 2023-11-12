@@ -18,7 +18,7 @@ const Content = () => {
     useEffect(() => {
         const sendRequest = async () => {
           try {
-            const Userresponse = await fetch('http://localhost:3000/api/questions');
+            const Userresponse = await fetch('https://ttapplication-backend.vercel.app/api/questions');
     
             const responseData = await Userresponse.json();
     
@@ -46,7 +46,7 @@ const Content = () => {
     
         try {
             // First PUT request to update user ratings
-            const userResponse = await fetch(`http://localhost:3000/api/users/update/${email}`, {
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const Content = () => {
     
         try { 
             // Second PUT request to update question ratings
-            const questionResponse = await fetch(`http://localhost:3000/api/questions/update`, {
+            const questionResponse = await fetch(`https://ttapplication-backend.vercel.app/api/questions/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,7 +90,6 @@ const Content = () => {
     };
     
 
-  
 
 
     const handleRatingChange = (id, question, value) => {
