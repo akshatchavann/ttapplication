@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Admin = () => {
-  const [formData, setFormData] = useState({ question: '', category: '', tweetURL: '' });
+  const [formData, setFormData] = useState({ question: '', category: '', tweetURL: '', password: '' });
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
@@ -10,8 +10,13 @@ const Admin = () => {
   };
 
   async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (formData.password !== 'asdfAc12345') {
+      setError('Invalid password');
+      return;
+    }
     try {
-      event.preventDefault();
       console.log("submitted");
       console.log(formData);
       const response = await fetch('http://localhost:3000/api/questions/create', {
@@ -59,8 +64,16 @@ const Admin = () => {
           value={formData.tweetURL}
           onChange={handleInputChange}
         />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleInputChange}
+        />
         <button type="submit">Submit</button>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 };

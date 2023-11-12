@@ -103,7 +103,7 @@ const Content = () => {
         });
     }
 
-    console.log(loadedQuestion)
+    console.log(ratings)
     return (
         <div>
         <Header />
@@ -127,13 +127,22 @@ const Content = () => {
                                 value={ratings.ans || '1'}
                             />
                             <div>
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                                <span>5</span>
-                                <span>6</span>
-                                <span>7</span>
+                            <span>1</span>
+                                    <span>_</span>
+                                    <span>2</span>
+                                    <span>_</span>
+                                    <span>3</span>
+                                    <span>_</span>
+                                    <span>4</span>
+                                    <span>_</span>
+                                    <span>5</span>
+                                    <span>_</span>
+                                    <span>6</span>
+                                    <span>_</span>
+                                    <span>7</span>
+                            </div>
+                            <div>
+                                Current Answer: {ratings.ans || '1'}
                             </div>
                         </div>
                     ))}
