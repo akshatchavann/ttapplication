@@ -19,7 +19,7 @@ const Admin = () => {
     try {
       console.log("submitted");
       console.log(formData);
-      const response = await fetch('http://localhost:3000/api/questions/create', {
+      const response = await fetch('https://ttapplication-backend.vercel.app/api/questions/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
