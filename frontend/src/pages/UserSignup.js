@@ -23,7 +23,7 @@ const UserSignup = () => {
             event.preventDefault()
             console.log("submitted")
             console.log(userdata)
-            const response = await fetch('http://localhost:3000/api/users/signup', {
+            const response = await fetch('https://ttapplication-backend.vercel.app/api/users/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
