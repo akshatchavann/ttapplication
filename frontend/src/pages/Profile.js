@@ -21,7 +21,7 @@ const Profile = () => {
     useEffect(() => {
         const sendRequest = async () => {
           try {
-            const response = await fetch(`http://localhost:3000/api/users/${email}`); 
+            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`); 
     
             const responseData = await response.json();
     
@@ -33,7 +33,7 @@ const Profile = () => {
 
 
           // Fetch questions data
-          const questionsResponse = await fetch(`http://localhost:3000/api/questions`);
+          const questionsResponse = await fetch(`https://ttapplication-backend.vercel.app/api/questions`);
           const questionsResponseData = await questionsResponse.json();
 
           if (!questionsResponse.ok) {
