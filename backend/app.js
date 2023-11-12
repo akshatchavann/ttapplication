@@ -19,8 +19,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// basic hello world
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+});
 
 
+//routes
 app.use('/api/users', usersRoutes);
 app.use('/api/questions', questionsRoutes);
 
