@@ -106,7 +106,8 @@ const Content = () => {
     return (
         <div>
         <Header />
-        <div>Content goes here</div>
+        <div>Content is here</div>
+        <div>Share your views</div>
         <div>
             <h2>Loaded Questions</h2>
             {loadedQuestion && loadedQuestion.length > 0 ? (
