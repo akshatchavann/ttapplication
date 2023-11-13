@@ -106,8 +106,7 @@ const Content = () => {
     return (
         <div>
         <Header />
-        <div>Content is here</div>
-        <div>Share your views</div>
+        <div>Question of the Day</div>
         <div>
             <h2>Loaded Questions</h2>
             {loadedQuestion && loadedQuestion.length > 0 ? (
@@ -129,15 +128,15 @@ const Content = () => {
                             <div>
                             <span>1</span>
                                     <span>_</span>
-                                    <span>2</span>
                                     <span>_</span>
-                                    <span>3</span>
+                                    <span>_</span>
+                                    <span>_</span>
                                     <span>_</span>
                                     <span>4</span>
                                     <span>_</span>
-                                    <span>5</span>
                                     <span>_</span>
-                                    <span>6</span>
+                                    <span>_</span>
+                                    <span>_</span>
                                     <span>_</span>
                                     <span>7</span>
                             </div>
