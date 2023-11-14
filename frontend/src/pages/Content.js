@@ -84,6 +84,8 @@ const Content = () => {
             } else {
                 console.log('Question ratings submitted successfully');
             }
+
+            alert('Ratings submitted successfully!');
         } catch (error) {
             console.error(error);
         }
@@ -108,7 +110,6 @@ const Content = () => {
         <Header />
         <div>Question of the Day</div>
         <div>
-            <h2>Loaded Questions</h2>
             {loadedQuestion && loadedQuestion.length > 0 ? (
                 <form onSubmit={handleSubmitRatings}>
                     {loadedQuestion.map((question, index) => (
@@ -126,19 +127,7 @@ const Content = () => {
                                 value={ratings.ans || '1'}
                             />
                             <div>
-                            <span>1</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>4</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>_</span>
-                                    <span>7</span>
+
                             </div>
                             <div>
                                 Current Answer: {ratings.ans || '1'}

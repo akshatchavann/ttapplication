@@ -14,3 +14,40 @@
     flex: 1;
     text-align: center;
 }
+
+/* Slider container */
+.question input[type="range"] {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 50%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (cross-browser) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .question input[type="range"]:hover {
+    opacity: 1; /* Fully opaque on hover */
+  }
+  
+  /* Slider thumb */
+  .question input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 35px; /* Set a specific slider handle width */
+    height: 35px; /* Slider handle height */
+    background: 
+    #2aed31; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .question input[type="range"]::-moz-range-thumb {
+    width: 35px; /* Set a specific slider handle width */
+    height: 35px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
