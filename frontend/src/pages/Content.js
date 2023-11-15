@@ -108,7 +108,6 @@ const Content = () => {
     return (
         <div>
         <Header />
-        <div>Question of the Day</div>
         <div>
             {loadedQuestion && loadedQuestion.length > 0 ? (
                 <form onSubmit={handleSubmitRatings}>
@@ -126,15 +125,25 @@ const Content = () => {
                                 onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
                                 value={ratings.ans || '1'}
                             />
+                            <div className="slider-labels">
+                                <span> 1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                            </div>
+
                             <div>
 
                             </div>
-                            <div>
+                            <div className="currans">
                                 Current Answer: {ratings.ans || '1'}
                             </div>
                         </div>
                     ))}
-                    <button type="submit">Submit Ratings</button>
+                    <button className="sub" type="submit">Submit Ratings</button>
                 </form>
             ) : (
                 <p>No questions available.</p>

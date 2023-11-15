@@ -1,0 +1,29 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333; /* Example: 2px solid border in dark color */
+}
+
+.left-container, .right-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    margin: 0 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.home-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #22c669;
+    color: white;
+    cursor: pointer;
+}

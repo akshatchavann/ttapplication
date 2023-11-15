@@ -80,6 +80,7 @@ const Profile = () => {
                   <p><strong>Question:</strong> {question}</p>
                   <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index]}</p>
                   <p><strong>Average Answer:</strong> {calculateAverageAnswer(question)}</p>
+                  <>-----------------------------------------------------------------------</>
                 </div>
               ))}
             </div>
