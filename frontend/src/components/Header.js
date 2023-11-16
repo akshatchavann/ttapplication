@@ -9,33 +9,33 @@ import { useParams } from 'react-router-dom';
 const Header = () => {
     const { email } = useParams();
   return (
-    <header className='header-container'>
-    <div className="left-container">
-        <div className="button-container">
-            <Link className="nav-link" to="/">
-                <button type="button" className="home-button">
-                    Sign Out
-                </button>
-            </Link>
-        </div>
-    </div>
-    <div className="right-container">
-        <div className="button-container">
-            <Link className="nav-link" to={`/Content/${email}`}>
-                <button type="button" className="home-button">
-                    Home
-                </button>
-            </Link>
-        </div>
-        <div className="button-container">
-            <Link className="nav-link" to={`/Profile/${email}`}>
-                <button type="button" className="home-button">
-                    Profile
-                </button>
-            </Link>
-        </div>
-    </div>
-</header>
+      <header className='header-container'>
+      <div className="left-container">
+          <div className="button-container">
+              <Link className="nav-link" to="/">
+                  <button type="button" className="home-button">
+                      Sign Out
+                  </button>
+              </Link>
+          </div>
+      </div>
+      <div className="right-container">
+          <div className="button-container">
+              <Link className="nav-link" to={`/Content/${email}`}>
+                  <button type="button" className="home-button">
+                      Home
+                  </button>
+              </Link>
+          </div>
+          <div className="button-container">
+              <Link className="nav-link" to={`/Profile/${email}`}>
+                  <button type="button" className="home-button">
+                      Profile
+                  </button>
+              </Link>
+          </div>
+      </div>
+  </header>
   );
 }
 
