@@ -20,10 +20,10 @@ const createQuestion = async (req, res, next) => {
       );
     }
   
-    const { question, category, tweetURL } = req.body; // Assuming your request body contains 'question' and 'category'
+    const { question, bio, category, tweetURL } = req.body; // Assuming your request body contains 'question' and 'category'
 
     try {
-        const newQuestion = new Question({ question, category,tweetURL });
+        const newQuestion = new Question({ question, bio, category, tweetURL });
         const savedQuestion = await newQuestion.save();
 
         res.status(201).json(savedQuestion); // Send the created question as JSON response with a 201 status code

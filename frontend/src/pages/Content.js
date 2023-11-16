@@ -104,7 +104,7 @@ const Content = () => {
         });
     }
 
-    console.log(ratings)
+    console.log(loadedQuestion)
     return (
         <div>
         <Header />
@@ -116,7 +116,8 @@ const Content = () => {
                             <blockquote className="twitter-tweet">
                                 <a href={question.tweetURL}></a>
                             </blockquote>
-                            <div>{question.question}</div>
+                            <div>{question.question}</div>  
+                            <div>{question.bio}</div>
                             <input
                                 type="range"
                                 min="1"

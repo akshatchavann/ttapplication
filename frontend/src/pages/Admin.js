@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Admin = () => {
-  const [formData, setFormData] = useState({ question: '', category: '', tweetURL: '', password: '' });
+  const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetURL: '', password: '' });
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
@@ -48,6 +48,13 @@ const Admin = () => {
           name="question"
           placeholder="Question"
           value={formData.question}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="bio"
+          placeholder="Bio for question"
+          value={formData.bio}
           onChange={handleInputChange}
         />
         <input
