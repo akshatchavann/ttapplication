@@ -7,14 +7,14 @@ const UserLogin = () => {
     const [userdata, setuserdata] = useState({email:'',password:''})
     const [error, setError] = useState(null);
 
-    function handlechange(event){
-        const {name,value} = event.target 
-        setuserdata(prevuserdat =>{
-          return {
-            ...prevuserdat,
-            [name] : value
-          }
-        } )
+    function handlechange(event) {
+        const { name, value } = event.target;
+        setuserdata(prevUserData => {
+            return {
+                ...prevUserData,
+                [name]: name === 'email' ? value.toLowerCase() : value
+            };
+        });
       }
     
     console.log(userdata)
@@ -42,6 +42,7 @@ const UserLogin = () => {
             console.log(error);
         }
     }
+    console.log(userdata)
 
     return (
         <div>

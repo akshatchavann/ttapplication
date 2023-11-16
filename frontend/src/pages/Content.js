@@ -60,7 +60,7 @@ const Content = () => {
                 const errorData = await userResponse.json();
                 setError(errorData.message);
             } else {
-                console.log('User ratings submitted successfully');
+                console.log('Opinion captured! Click the "My Profile" button to see more.');
             }
         } catch (error) {
             console.error(error);
@@ -85,7 +85,7 @@ const Content = () => {
                 console.log('Question ratings submitted successfully');
             }
 
-            alert('Ratings submitted successfully!');
+            alert('Opinion captured! Click the "My Profile" button to see more.');
         } catch (error) {
             console.error(error);
         }
@@ -143,7 +143,7 @@ const Content = () => {
                             </div>
                         </div>
                     ))}
-                    <button className="sub" type="submit">Submit Ratings</button>
+                    <button className="sub" type="submit">Submit</button>
                 </form>
             ) : (
                 <p>No questions available.</p>

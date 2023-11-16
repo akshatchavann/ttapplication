@@ -7,16 +7,16 @@ const UserSignup = () => {
     const [userdata, setuserdata] = useState({firstname: '', lastname: '', email:'',phoneNumber:0,password:'',confirmPassword:"",admin: false})
     const [error, setError] = useState(null);
     console.log(userdata)
-
-    function handlechange(event){
-        const {name,value} = event.target 
-        setuserdata(prevuserdat =>{
+    
+    function handlechange(event) {
+      const { name, value } = event.target;
+      setuserdata(prevUserData => {
           return {
-            ...prevuserdat,
-            [name] : value
-          }
-        } )
-      }
+              ...prevUserData,
+              [name]: name === 'email' ? value.toLowerCase() : value
+          };
+      });
+    }
     
     async function handleSubmit(event){
         try{
@@ -42,6 +42,7 @@ const UserSignup = () => {
             console.log(error);
         }
     }
+    console.log(userdata)
     return (
         <div>
         <div className='container'>
@@ -90,7 +91,7 @@ const UserSignup = () => {
           </form>
         </div>
         <div className='mt-1'>
-              <p>Already a user? <Link to={"/UserLogin"}><strong>Login here</strong></Link></p>
+              <p className='login'>Already a user? <Link to={"/UserLogin"}><strong className='login'>Login here</strong></Link></p>
           </div>
         </div>
         </div>

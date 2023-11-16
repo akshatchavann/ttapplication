@@ -61,10 +61,12 @@
 .sub {
   display: flex;
   justify-content: center; /* Center children horizontally inside .sub */
-  width: 50%; /* Width of .sub */
+  width: 60%; /* Width of .sub */
+  height: 30px;
   margin-top: 5px;
   margin-left: auto; /* Auto margin on the left */
   margin-right: auto; /* Auto margin on the right */
+  padding-top: 5px;
 }
 
 
