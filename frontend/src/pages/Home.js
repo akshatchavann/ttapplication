@@ -10,7 +10,7 @@ const Home = () => {
         <div className="homecontainter">
             <div className="description">
             <Link className='nav-link' to="/">
-                <img src={logo} alt="Website Logo" />
+                <img className="logo" src={logo} alt="Website Logo" />
             </Link>
             </div>
             <div className="buttonContainer">
