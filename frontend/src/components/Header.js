@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import '../styles/Header.css';
-import logo from "../assets/ThinkThroughLogo.png";
+import logo from "../assets/ThinkThrough.png";
 import { useParams } from 'react-router-dom';
 
 const Header = () => {
