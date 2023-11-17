@@ -113,27 +113,27 @@ const Content = () => {
                 <form onSubmit={handleSubmitRatings}>
                     {loadedQuestion.map((question, index) => (
                         <div key={index} className="question">
-                            <blockquote className="twitter-tweet">
+                            <blockquote className="twitter-tweet twitter-tweet-rendered">
                                 <a href={question.tweetURL}></a>
                             </blockquote>
                             <div>{question.question}</div>  
                             <div>{question.bio}</div>
                             <input
                                 type="range"
-                                min="1"
-                                max="7"
+                                min="-3"
+                                max="3"
                                 name={`rating-${question.question}`}
                                 onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
-                                value={ratings.ans || '1'}
+                                value={ratings.ans || '-3'}
                             />
                             <div className="slider-labels">
-                                <span> 1</span>
+                                <span> -3</span>
+                                <span>-2</span>
+                                <span>-1</span>
+                                <span>0</span>
+                                <span>1</span>
                                 <span>2</span>
                                 <span>3</span>
-                                <span>4</span>
-                                <span>5</span>
-                                <span>6</span>
-                                <span>7</span>
                             </div>
 
                             <div>
