@@ -12,7 +12,7 @@ const UserLogin = () => {
         setuserdata(prevUserData => {
             return {
                 ...prevUserData,
-                [name]: name === 'email' ? value.toLowerCase() : value
+                [name]: value
             };
         });
       }
@@ -22,13 +22,17 @@ const UserLogin = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
+            const dataToSend = {
+                ...userdata,
+                email: userdata.email.toLowerCase(),
+            };
             console.log(userdata)
             const response = await fetch('https://ttapplication-backend.vercel.app/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userdata)
+                body: JSON.stringify(dataToSend)
             })
 
             if (!response.ok) {
@@ -36,7 +40,7 @@ const UserLogin = () => {
                 setError(errorData.message);
               } else {
                 console.log('Login successful');
-                window.location.href = `/Content/${userdata.email}`;
+                window.location.href = `/Content/${dataToSend.email}`;
               }
         } catch (error) {
             console.log(error);

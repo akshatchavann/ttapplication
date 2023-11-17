@@ -13,7 +13,7 @@ const UserSignup = () => {
       setuserdata(prevUserData => {
           return {
               ...prevUserData,
-              [name]: name === 'email' ? value.toLowerCase() : value
+              [name]: value
           };
       });
     }
@@ -21,6 +21,10 @@ const UserSignup = () => {
     async function handleSubmit(event){
         try{
             event.preventDefault()
+            const dataToSend = {
+              ...userdata,
+              email: userdata.email.toLowerCase(),
+          };
             console.log("submitted")
             console.log(userdata)
             const response = await fetch('https://ttapplication-backend.vercel.app/api/users/signup', {
@@ -28,7 +32,7 @@ const UserSignup = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userdata)
+                body: JSON.stringify(dataToSend)
             })
 
             if (!response.ok) {
