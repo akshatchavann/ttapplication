@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 
 const Admin = () => {
-  const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetURL: '', password: '' });
+  const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetboolean: false, tweetURL: '', contentboolean:false, contentURL:'', password: '' , left: '', right: '',mid: ''});
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, type, checked, value } = e.target;
+
+    if (type === 'checkbox') {
+        setFormData({ ...formData, [name]: checked });
+    } else {
+        setFormData({ ...formData, [name]: value });
+    }
+};
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -47,14 +53,14 @@ const Admin = () => {
         <textarea
           type="text"
           name="question"
-          placeholder="Question"
+          placeholder="Question Name"
           value={formData.question}
           onChange={handleInputChange}
         />
         <textarea
           type="text"
           name="bio"
-          placeholder="Bio for question"
+          placeholder="Question Bio"
           value={formData.bio}
           onChange={handleInputChange}
         />
@@ -66,12 +72,51 @@ const Admin = () => {
           onChange={handleInputChange}
         />
         <input
+          type="checkbox"
+          name="tweetboolean"
+          checked={formData.tweetboolean}
+          onChange={handleInputChange}
+        />
+        <input
           type="text"
           name="tweetURL"
           placeholder="Tweet URL"
           value={formData.tweetURL}
           onChange={handleInputChange}
         />
+        <input
+          type="checkbox"
+          name="contentboolean"
+          checked={formData.contentboolean}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="contentURL"
+          placeholder="Other Content  URL"
+          value={formData.contentURL}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="left"
+          placeholder="left tag"
+          value={formData.left}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="mid"
+          placeholder="mid tag"
+          value={formData.mid}
+          onChange={handleInputChange}
+        />        <input
+        type="text"
+        name="right"
+        placeholder="right tag"
+        value={formData.right}
+        onChange={handleInputChange}
+      />
         <input
           type="password"
           name="password"

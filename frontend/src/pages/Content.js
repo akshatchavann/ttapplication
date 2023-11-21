@@ -117,6 +117,13 @@ const Content = () => {
                             </blockquote>
                             <div>{question.question}</div>  
                             <div>{question.bio}</div>
+                            <div>{question.left}</div>
+                            <div>{question.right}</div>
+                            <div>{question.mid}</div>
+                            <a className="learn" href="https://twitter.com/elonmusk/status/1724908287471272299" target="_blank" rel="noopener noreferrer">
+                                 Learn More
+                            </a>
+
                             <input
                                 type="range"
                                 min="-3"

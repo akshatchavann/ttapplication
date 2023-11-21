@@ -90,3 +90,8 @@
   flex: none; /* Prevent the labels from growing or shrinking */
   width: auto; /* Allow the labels to take their natural width */
 }
+
+
+.learn {
+  color: white;
+}
