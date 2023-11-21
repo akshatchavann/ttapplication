@@ -50,82 +50,142 @@ const Admin = () => {
     <div>
       <div>Admin goes here</div>
       <form onSubmit={handleSubmit}>
-        <textarea
-          type="text"
-          name="question"
-          placeholder="Question Name"
-          value={formData.question}
-          onChange={handleInputChange}
-        />
-        <textarea
-          type="text"
-          name="bio"
-          placeholder="Question Bio"
-          value={formData.bio}
-          onChange={handleInputChange}
-        />
-        <textarea
-          type="text"
-          name="category"
-          placeholder="Category"
-          value={formData.category}
-          onChange={handleInputChange}
-        />
-        <input
-          type="checkbox"
-          name="tweetboolean"
-          checked={formData.tweetboolean}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="tweetURL"
-          placeholder="Tweet URL"
-          value={formData.tweetURL}
-          onChange={handleInputChange}
-        />
-        <input
-          type="checkbox"
-          name="contentboolean"
-          checked={formData.contentboolean}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="contentURL"
-          placeholder="Other Content  URL"
-          value={formData.contentURL}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="left"
-          placeholder="left tag"
-          value={formData.left}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="mid"
-          placeholder="mid tag"
-          value={formData.mid}
-          onChange={handleInputChange}
-        />        <input
-        type="text"
-        name="right"
-        placeholder="right tag"
-        value={formData.right}
-        onChange={handleInputChange}
-      />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
+        <div className='fieldContainer'>
+
+          <div className='formgroup'>
+            <textarea
+                className='textarea'
+                name="question"
+                placeholder="Question Name"
+                value={formData.question}
+                onChange={handleInputChange}
+                style={{ height: "10em" }}
+            />
+          </div>
+          <div className='formgroup'>
+            <textarea
+                className='textarea'
+                name="bio"
+                placeholder="Question Bio"
+                value={formData.bio}
+                onChange={handleInputChange}
+                style={{ height: "10em" }}
+            />
+          </div>
+          <div className='formgroup'>
+            <textarea
+                name="category"
+                placeholder="Category"
+                value={formData.category}
+                onChange={handleInputChange}
+            />
+          </div>
+          <div className='formgroup'>
+            <label className='checkboxLabel'>
+            Include Tweet URL
+                <input
+                    type="checkbox"
+                    name="tweetboolean"
+                    checked={formData.tweetboolean}
+                    onChange={handleInputChange}
+                />
+                
+            </label>
+          </div>
+
+          <div className='formgroup'>
+            {formData.tweetboolean && (
+                <input
+                    className='inputField'
+                    type="text"
+                    name="tweetURL"
+                    placeholder="Tweet URL"
+                    value={formData.tweetURL}
+                    onChange={handleInputChange}
+                />
+            )}
+          </div>
+          <div className='formgroup'>
+            <label className='checkboxLabel'>
+                Include Other Content URL:
+                <input
+                    type="checkbox"
+                    name="contentboolean"
+                    checked={formData.contentboolean}
+                    onChange={handleInputChange}
+                />
+            </label>
+          </div>
+          <div className='formgroup'>
+            {formData.contentboolean && (
+                <input
+                    className='inputField'
+                    type="text"
+                    name="contentURL"
+                    placeholder="Other Content URL"
+                    value={formData.contentURL}
+                    onChange={handleInputChange}
+                />
+            )}
+            </div>
+            <div className='formgroup'>
+            <label className='form-label'>
+                Left Tag:
+                <input
+                    className='inputField'
+                    type="text"
+                    name="left"
+                    placeholder="Left Tag"
+                    value={formData.left}
+                    onChange={handleInputChange}
+                />
+            </label>
+            </div>
+            <div className='formgroup'>
+            <label className='form-label'>
+                Mid Tag:
+                <input
+                    className='inputField'
+                    type="text"
+                    name="mid"
+                    placeholder="Mid Tag"
+                    value={formData.mid}
+                    onChange={handleInputChange}
+                />
+            </label>
+            </div>
+            
+            <div className='formgroup'>
+            <label className='form-label'>
+                Right Tag:
+                <input
+                    className='inputField'
+                    type="text"
+                    name="right"
+                    placeholder="Right Tag"
+                    value={formData.right}
+                    onChange={handleInputChange}
+                />
+            </label>
+            </div>
+            <div className='formgroup'>
+            <label className='form-label'>
+                Password:
+                <input
+                    className='inputField'
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                />
+            </label>
+            </div>
+            <button type="submit" className='submitButton'>Submit</button>
+        </div>
+    </form>
+
+      
       {error && <p>{error}</p>}
     </div>
   );
