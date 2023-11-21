@@ -7,6 +7,9 @@ const questionSchema = new Schema({
     category: { type: String, required: true },
     answers: { type: Array, required: true },
     tweetURL: { type: String, required: true },
+    left: { type: String, required: true },
+    mid: { type: String, required: true },
+    right: { type: String, required: true },
 });
 
 
