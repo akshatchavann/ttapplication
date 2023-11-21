@@ -115,8 +115,8 @@ const Content = () => {
                             <blockquote className="twitter-tweet twitter-tweet-rendered">
                                 <a href={question.tweetURL}></a>
                             </blockquote>
-                            <div>{question.question}</div>  
                             <div>{question.bio}</div>
+                            <div className="question-text">{question.question}</div>  
 
                             {question.tweetboolean && (
                                 <a 
