@@ -121,11 +121,11 @@ const Content = () => {
                             {question.tweetboolean && (
                                 <a 
                                     className="learn" 
-                                    href="https://twitter.com/elonmusk/status/1724908287471272299" 
+                                    href={question.tweetURL}
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                 >
-                                    Learn More
+                                    Learn More tweet
                                 </a>
                             )}
 
@@ -133,7 +133,7 @@ const Content = () => {
                                 
                                 <a 
                                     className="learn" 
-                                    href="your_content_url_here" 
+                                    href= {question.contentURL} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                 >
@@ -155,6 +155,7 @@ const Content = () => {
                                 <span></span>
                                 <span>{question.mid}</span>
                                 <span></span>
+
                                 <span></span>
                                 <span>{question.right}</span>
                             </div>                 
