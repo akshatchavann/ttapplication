@@ -105,9 +105,13 @@ const Content = () => {
 
     console.log(loadedQuestion)
     return (
+
         <div>
+            <div className="content">
         <Header />
-        <div>
+            </div>
+        
+        <div className="form">
             {loadedQuestion && loadedQuestion.length > 0 ? (
                 <form onSubmit={handleSubmitRatings}>
                     {loadedQuestion.map((question, index) => (
