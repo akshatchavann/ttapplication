@@ -25,6 +25,13 @@ const UserSignup = () => {
               ...userdata,
               email: userdata.email.toLowerCase(),
           };
+
+          if (userdata.password !== userdata.confirmPassword) {
+            alert('Passwords do not match');
+            setError('Passwords do not match');
+            return;
+          }
+
             console.log("submitted")
             console.log(userdata)
             const response = await fetch('https://ttapplication-backend.vercel.app/api/users/signup', {
