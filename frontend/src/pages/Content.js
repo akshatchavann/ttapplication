@@ -117,12 +117,29 @@ const Content = () => {
                             </blockquote>
                             <div>{question.question}</div>  
                             <div>{question.bio}</div>
-                            <div>{question.left}</div>
-                            <div>{question.right}</div>
-                            <div>{question.mid}</div>
-                            <a className="learn" href="https://twitter.com/elonmusk/status/1724908287471272299" target="_blank" rel="noopener noreferrer">
-                                 Learn More
-                            </a>
+
+                            {question.tweetboolean && (
+                                <a 
+                                    className="learn" 
+                                    href="https://twitter.com/elonmusk/status/1724908287471272299" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    Learn More
+                                </a>
+                            )}
+
+                            {question.contentboolean && (
+                                
+                                <a 
+                                    className="learn" 
+                                    href="your_content_url_here" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
+                                    Learn More
+                                </a>
+                            )}
 
                             <input
                                 type="range"
@@ -132,6 +149,15 @@ const Content = () => {
                                 onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
                                 value={ratings.ans || '-3'}
                             />
+                            <div className="slider-labels">
+                                <span> {question.left} </span>
+                                <span> </span>
+                                <span></span>
+                                <span>{question.mid}</span>
+                                <span></span>
+                                <span></span>
+                                <span>{question.right}</span>
+                            </div>                 
                             <div className="slider-labels">
                                 <span> -3</span>
                                 <span>-2</span>
