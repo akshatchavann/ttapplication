@@ -94,7 +94,7 @@ const Admin = () => {
           </div>
 
           <div className='formgroup'>
-            {formData.tweetboolean && (
+            {(
                 <input
                     className='inputField'
                     type="text"
@@ -117,7 +117,7 @@ const Admin = () => {
             </label>
           </div>
           <div className='formgroup'>
-            {formData.contentboolean && (
+            { (
                 <input
                     className='inputField'
                     type="text"
