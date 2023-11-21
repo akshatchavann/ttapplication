@@ -37,12 +37,14 @@ const UserSignup = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
+                alert(errorData.message)
                 setError(errorData.message);
               } else {
                 console.log('Signup successful');
                 window.location.href = '/UserLogin';
               }
         } catch (error) {
+            alert(error.message)
             console.log(error);
         }
     }

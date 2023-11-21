@@ -32,6 +32,7 @@ const Admin = () => {
         setError(errorData.message);
       } else {
         console.log('Question submitted successfully');
+        alert('Question submitted successfully')
       }
     } catch (error) {
       console.log(error);
@@ -43,21 +44,21 @@ const Admin = () => {
     <div>
       <div>Admin goes here</div>
       <form onSubmit={handleSubmit}>
-        <input
+        <textarea
           type="text"
           name="question"
           placeholder="Question"
           value={formData.question}
           onChange={handleInputChange}
         />
-        <input
+        <textarea
           type="text"
           name="bio"
           placeholder="Bio for question"
           value={formData.bio}
           onChange={handleInputChange}
         />
-        <input
+        <textarea
           type="text"
           name="category"
           placeholder="Category"
