@@ -1,4 +1,5 @@
 .profile-question {
+    margin-top: 35px;
     border-bottom: 1px solid #ccc; /* A light grey bottom border */
     padding-bottom: 10px; /* Some padding at the bottom for spacing */
     margin-bottom: 10px; /* Margin at the bottom to separate from the next question */
