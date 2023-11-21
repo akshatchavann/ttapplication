@@ -99,7 +99,6 @@
   font-weight: bold;
 }
 
-
 .form {
-  padding-top: 240px;
+  margin-top: 250px; /* Adjust this value based on the actual height of your header */
 }

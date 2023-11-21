@@ -107,9 +107,7 @@ const Content = () => {
     return (
 
         <div>
-            <div className="content">
         <Header />
-            </div>
         
         <div className="form">
             {loadedQuestion && loadedQuestion.length > 0 ? (
