@@ -37,12 +37,14 @@ const UserLogin = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
+                alert(errorData.message)
                 setError(errorData.message);
               } else {
                 console.log('Login successful');
                 window.location.href = `/Content/${dataToSend.email}`;
               }
         } catch (error) {
+            alert(error.message)
             console.log(error);
         }
     }
