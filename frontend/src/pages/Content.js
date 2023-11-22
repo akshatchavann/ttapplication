@@ -107,7 +107,7 @@ const Content = () => {
         // Check if loadedQuestion is defined and has active links
         const hasActiveLinks = loadedQuestion && 
             loadedQuestion[0] && // Check if loadedQuestion[0] is defined
-            (loadedQuestion[0].tweetboolean || loadedQuestion[0].contentboolean);
+            (loadedQuestion[0].tweetboolean);
         
         // Return the style object based on the condition
         return { marginTop: hasActiveLinks ? '0px' : '250px' };
