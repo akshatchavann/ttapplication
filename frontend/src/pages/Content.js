@@ -103,13 +103,23 @@ const Content = () => {
         });
     }
 
-    console.log(loadedQuestion)
+    const getFormStyle = () => {
+        // Check if loadedQuestion is defined and has active links
+        const hasActiveLinks = loadedQuestion && 
+            loadedQuestion[0] && // Check if loadedQuestion[0] is defined
+            (loadedQuestion[0].tweetboolean || loadedQuestion[0].contentboolean);
+        
+        // Return the style object based on the condition
+        return { marginTop: hasActiveLinks ? '0px' : '250px' };
+    };
+    
+    
     return (
 
         <div>
         <Header />
         
-        <div className="form">
+        <div className="form" style={getFormStyle()}>
             {loadedQuestion && loadedQuestion.length > 0 ? (
                 <form onSubmit={handleSubmitRatings}>
                     {loadedQuestion.map((question, index) => (
