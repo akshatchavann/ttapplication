@@ -52,7 +52,7 @@ const signup = async (req, res, next) => {
       password,
       questions: [],
       answers: [],
-      questionindex: 0,
+      questionindex: 1,
     });
   
     try {
