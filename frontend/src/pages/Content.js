@@ -159,7 +159,7 @@ const Content = () => {
                                 max="3"
                                 name={`rating-${question.question}`}
                                 onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
-                                value={ratings.ans || '-3'}
+                                value={ratings.ans || '0'}
                             />
                             <div className="slider-labels">
                                 <span> {question.left} </span>
@@ -185,7 +185,7 @@ const Content = () => {
 
                             </div>
                             <div className="currans">
-                                Current Answer: {ratings.ans || '1'}
+                                Current Answer: {ratings.ans || '0'}
                             </div>
                         </div>
                     ))}
