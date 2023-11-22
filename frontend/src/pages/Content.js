@@ -13,33 +13,76 @@ const Content = () => {
     const { email } = useParams();
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(0); // The current question index [0, 1, 2, 3, 4
+    const [currentIndex, setCurrentIndex] = useState(0); 
 
-    // Fetch the questions from the backend
     useEffect(() => {
-        const sendRequest = async () => {
-          try {
-            const Userresponse = await fetch('https://ttapplication-backend.vercel.app/api/questions');
+        const fetchQuestionsAndUserIndex = async () => {
+            try {
+                // Fetch questions
+                const questionsResponse = await fetch('https://ttapplication-backend.vercel.app/api/questions');
+                const questionsData = await questionsResponse.json();
+                if (!questionsResponse.ok) {
+                    throw new Error(questionsData.message);
+                }
+                setLoadedQuestion(questionsData.questions);
     
-            const responseData = await Userresponse.json();
+                // Fetch user's question index
+                const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+                if (!userResponse.ok) {
+                    throw new Error('Could not fetch user data');
+                }
+                const userData = await userResponse.json();
+                const dbQuestionIndex = userData.user.questionindex; // assuming the response has a questionindex field
+
+
+                setCurrentIndex(userData.user.questionindex); // Set the index based on the user's progress
+            } catch (error) {
+                setError(error.message || 'Something went wrong');
+            }
+        };
     
-            if (!Userresponse.ok) {
-              throw new Error(responseData.message);
+        fetchQuestionsAndUserIndex();
+    }, [email]);
+
+      const handleNextClick = async () => {
+        try {
+            // Make a GET request to fetch the current questionindex for the user
+            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+            if (!response.ok) {
+                throw new Error('Could not fetch question index');
             }
     
-            setLoadedQuestion(responseData.questions); // Set it as an array with the last question
-          } catch (error) {
-            setError(error.message);
-          }
-        };
-        sendRequest();
-      }, []);
+            const data = await response.json();
+            const dbQuestionIndex = data.user.questionindex; // assuming the response has a questionindex field
 
-      const handleNextClick = () => {
-        if (currentIndex < loadedQuestion.length) {
-            setCurrentIndex(currentIndex + 1); // This will cause a re-render
+            // Compare and update currentIndex only if it is less than the dbQuestionIndex
+            if (currentIndex < dbQuestionIndex) {
+                setCurrentIndex(currentIndex + 1);
+            } else if (currentIndex === dbQuestionIndex) {
+                // Increment both currentIndex and dbQuestionIndex
+                setCurrentIndex(currentIndex + 1);
+    
+                // Send a PUT request to increment questionindex in the database
+                const updateResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/increasequestion/${email}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                if (!updateResponse.ok) {
+                    throw new Error('Could not update question index');
+                }
+    
+                // Optionally handle the response from the PUT request
+                const updateData = await updateResponse.json();
+                console.log(updateData.message);
+            }
+        } catch (error) {
+            console.error('There was an error updating the question index: ', error);
         }
     };
+    
     
     const handlePrevClick = () => {
         if (currentIndex > 0) {
@@ -59,8 +102,6 @@ const Content = () => {
     };
 
     
-    console.log(loadedQuestion);
-    console.log(currentIndex)
 
     return (
 
@@ -74,7 +115,7 @@ const Content = () => {
                 <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} onNext={handleNextClick} />
             )}
 
-            {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length === currentIndex && (
+            {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length <= currentIndex && (
                 <CompletedPage />
             )}
             <div className="prevnext">
