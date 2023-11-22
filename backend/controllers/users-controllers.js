@@ -52,7 +52,7 @@ const signup = async (req, res, next) => {
       password,
       questions: [],
       answers: [],
-      questionindex: 1,
+      questionindex: 0,
     });
   
     try {
@@ -94,6 +94,33 @@ const login = async (req, res, next) => {
 
     res.json({message: 'Logged in!'});
 };
+
+const increaseQuestionIndex = async (req, res, next) => {
+  const userEmail = req.params.uemail;
+  try {
+      // Find the user by email and increment the questionindex by 1
+      const updatedUser = await User.findOneAndUpdate(
+          { email: userEmail }, // Filter by email
+          { $inc: { questionindex: 1 } }, // Increment operation
+          { new: true } // Option to return the updated document
+      );
+
+      if (updatedUser) {
+          res.status(200).json({
+              message: "Question index increased successfully",
+              user: updatedUser
+          });
+      } else {
+          res.status(404).json({ message: "User not found" });
+      }
+  } catch (error) {
+      res.status(500).json({ message: "An error occurred", error: error });
+      next(error);
+  }
+};
+
+
+
 
 
 const updateUserbyID = async (req, res, next) => {
@@ -159,3 +186,4 @@ exports.signup = signup;
 exports.login = login;
 exports.updateUserbyID = updateUserbyID;
 exports.getUserbyEmail = getUserbyEmail;  
+exports.increaseQuestionIndex = increaseQuestionIndex;

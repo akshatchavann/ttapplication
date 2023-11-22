@@ -16,6 +16,8 @@ router.put('/update/:uemail', usersControllers.updateUserbyID);
 
 router.get('/:uemail', usersControllers.getUserbyEmail);
 
+router.put('/increasequestion/:uemail', usersControllers.increaseQuestionIndex);
+
 
 
 module.exports = router;
