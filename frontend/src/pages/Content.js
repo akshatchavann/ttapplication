@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Card from './Card';
+import CompletedPage from "./CompletedPage";
 
 const Content = () => {
     // Retrieve the 'id' parameter from the URL
@@ -35,10 +36,8 @@ const Content = () => {
       }, []);
 
       const handleNextClick = () => {
-        if (currentIndex < loadedQuestion.length - 1) {
+        if (currentIndex < loadedQuestion.length) {
             setCurrentIndex(currentIndex + 1); // This will cause a re-render
-        } else {
-            alert('This is the last question.');
         }
     };
     
@@ -50,22 +49,36 @@ const Content = () => {
         }
     };
 
+    const getFormStyle = () => {
+        // Check if loadedQuestion is defined and has active links
+        const hasActiveLinks =   // Check if loadedQuestion[0] is defined
+            (loadedQuestion && loadedQuestion[currentIndex] && loadedQuestion[currentIndex].tweetboolean);
+        
+        // Return the style object based on the condition
+        return { paddingTop: hasActiveLinks ? '200px' : '0px', height: '100px' };
+    };
+
     
     console.log(loadedQuestion);
     console.log(currentIndex)
+
     return (
 
         <div>
             <Header />
-            <div style={{ marginTop: '100px', height: '100px' }}></div>
+
+            <div style={getFormStyle()}></div>
 
             
-            {loadedQuestion && loadedQuestion.length > 0 && (
+            {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length > currentIndex && (
                 <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} onNext={handleNextClick} />
             )}
+
+            {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length === currentIndex && (
+                <CompletedPage />
+            )}
             <div className="prevnext">
-                <button onClick={handlePrevClick}>Prev</button>
-                <button onClick={handleNextClick}>Next</button>
+                <button onClick={handlePrevClick}>Previous Question</button>
             </div>
         </div>
     
