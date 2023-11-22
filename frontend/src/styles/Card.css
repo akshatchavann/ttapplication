@@ -47,7 +47,7 @@
   .question input[type="range"]::-moz-range-thumb {
     width: 30px; /* Set a specific slider handle width */
     height: 30px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
+    background: #2aed31; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
   
@@ -67,6 +67,7 @@
   margin-left: auto; /* Auto margin on the left */
   margin-right: auto; /* Autonpm margin on the right */
   padding-top: 5px;
+  background-color: #2aed31;
 }
 
 

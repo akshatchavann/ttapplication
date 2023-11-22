@@ -100,3 +100,18 @@
 }
 
 
+/* Content.css */
+
+.prevnext {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.prevnext button {
+  margin: 0 10px;
+  padding: 5px 10px; /* Reduced padding */
+  font-size: 14px; /* Adjusted font size */
+
+}

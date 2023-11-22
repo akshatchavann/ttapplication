@@ -77,7 +77,7 @@ const Card = (props) => {
         return { marginTop: hasActiveLinks ? '0px' : '250px' };
     };
     return (
-        <div className="form" style={getFormStyle()}>
+        <div className="form">
         {props && props.info && props.info[0] ? (
             <form onSubmit={handleSubmitRatings}>
                 {props.info.map((question, index) => (

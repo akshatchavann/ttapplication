@@ -12,6 +12,7 @@ const Content = () => {
     const { email } = useParams();
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(0); // The current question index [0, 1, 2, 3, 4
 
     // Fetch the questions from the backend
     useEffect(() => {
@@ -25,8 +26,7 @@ const Content = () => {
               throw new Error(responseData.message);
             }
     
-            const lastQuestion = responseData.questions[responseData.questions.length - 1];
-            setLoadedQuestion([lastQuestion]); // Set it as an array with the last question
+            setLoadedQuestion(responseData.questions); // Set it as an array with the last question
           } catch (error) {
             setError(error.message);
           }
@@ -34,18 +34,41 @@ const Content = () => {
         sendRequest();
       }, []);
 
+      const handleNextClick = () => {
+        if (currentIndex < loadedQuestion.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        }
+        if (currentIndex === loadedQuestion.length - 1) {
+            alert('This is the last question, click the "Profile" button to see more.');
+        }
+    };
+
+    const handlePrevClick = () => {
+        if (currentIndex === 0) {
+            alert('This is the first question, click the "Profile" button to see more.');
+        } else {
+            setCurrentIndex(currentIndex - 1);
+        }
+    }
+
     
-    
+    console.log(loadedQuestion);
+    console.log(currentIndex)
     return (
 
-    <div>
-        <Header />
-        <div style={{ marginTop: '100px' }}></div>
+        <div>
+            <Header />
+            <div style={{ marginTop: '100px', height: '100px' }}></div>
 
-        {loadedQuestion && loadedQuestion[0] && (
-                <Card info={loadedQuestion} />
+            
+            {loadedQuestion && loadedQuestion.length > 0 && (
+                <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} />
             )}
-    </div>
+            <div className="prevnext">
+                <button onClick={handlePrevClick}>Prev</button>
+                <button onClick={handleNextClick}>Next</button>
+            </div>
+        </div>
     
     );
 };
