@@ -51,7 +51,8 @@ const signup = async (req, res, next) => {
       phoneNumber,
       password,
       questions: [],
-      answers: []
+      answers: [],
+      questionindex: 0,
     });
   
     try {
@@ -128,6 +129,7 @@ const updateUserbyID = async (req, res, next) => {
     next(error);
   }
 };
+
 
 
 const getUserbyEmail = async (req, res, next) => {

@@ -10,6 +10,7 @@ const userSchema = new Schema({
     password: { type: String, required: true, minlength: 6 },
     questions: { type: Array, required: false },
     answers: { type: Array, required: false },
+    questionindex: { type: Number, required: false },
 });
 
 module.exports = mongoose.model('User', userSchema);
