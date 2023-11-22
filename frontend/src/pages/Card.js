@@ -44,13 +44,17 @@ const Card = (props) => {
                     ratings, // Include the ratings object for users
                 ),
             });
+
     
             if (!userResponse.ok) {
                 const errorData = await userResponse.json();
                 setError(errorData.message);
+            
             } else {
                 console.log('Opinion captured! Click the "Profile" button to see more.');
+                props.onNext && props.onNext();
                 alert('Opinion captured! Click the "Profile" button to see more.');
+
             }
         } catch (error) {
             console.error(error);
@@ -76,6 +80,7 @@ const Card = (props) => {
         // Return the style object based on the condition
         return { marginTop: hasActiveLinks ? '0px' : '250px' };
     };
+
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (

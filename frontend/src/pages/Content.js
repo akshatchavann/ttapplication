@@ -36,20 +36,19 @@ const Content = () => {
 
       const handleNextClick = () => {
         if (currentIndex < loadedQuestion.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        }
-        if (currentIndex === loadedQuestion.length - 1) {
-            alert('This is the last question, click the "Profile" button to see more.');
+            setCurrentIndex(currentIndex + 1); // This will cause a re-render
+        } else {
+            alert('This is the last question.');
         }
     };
-
+    
     const handlePrevClick = () => {
-        if (currentIndex === 0) {
-            alert('This is the first question, click the "Profile" button to see more.');
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1); // This will also cause a re-render
         } else {
-            setCurrentIndex(currentIndex - 1);
+            alert('This is the first question.');
         }
-    }
+    };
 
     
     console.log(loadedQuestion);
@@ -62,7 +61,7 @@ const Content = () => {
 
             
             {loadedQuestion && loadedQuestion.length > 0 && (
-                <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} />
+                <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} onNext={handleNextClick} />
             )}
             <div className="prevnext">
                 <button onClick={handlePrevClick}>Prev</button>
