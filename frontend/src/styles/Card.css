@@ -1,0 +1,102 @@
+.rating-slider-container {
+    display: flex;
+    align-items: center;
+}
+
+.rating-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.rating-labels span {
+    flex: 1;
+    text-align: center;
+}
+
+/* Slider container */
+.question input[type="range"] {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (cross-browser) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .question input[type="range"]:hover {
+    opacity: 1; /* Fully opaque on hover */
+  }
+  
+  /* Slider thumb */
+  .question input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 30px; /* Set a specific slider handle width */
+    height: 30px; /* Slider handle height */
+    background: 
+    #2aed31; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .question input[type="range"]::-moz-range-thumb {
+    width: 30px; /* Set a specific slider handle width */
+    height: 30px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .currans {
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    width: 100%;
+    margin-top: 5px;
+}
+
+.sub {
+  display: flex;
+  justify-content: center; /* Center children horizontally inside .sub */
+  width: 60%; /* Width of .sub */
+  height: 30px;
+  margin-top: 5px;
+  margin-left: auto; /* Auto margin on the left */
+  margin-right: auto; /* Autonpm margin on the right */
+  padding-top: 5px;
+}
+
+
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally */
+  justify-content: center; /* Centers content vertically */
+  /* ...other styles... */
+}
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px; /* Spacing from the slider to the labels */
+  width: calc(100% - 30px); /* Adjust width to align with the slider's thumb */
+  padding: 0 15px; /* Half the thumb's width to align first and last labels with the ends */
+}
+
+.slider-labels span {
+  text-align: center;
+  flex: none; /* Prevent the labels from growing or shrinking */
+  width: auto; /* Allow the labels to take their natural width */
+}
+
+
+.learn {
+  color: white;
+}
+.question-text {
+  font-weight: bold;
+}
+
+
