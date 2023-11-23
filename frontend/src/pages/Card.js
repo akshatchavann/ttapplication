@@ -114,7 +114,12 @@ const Card = (props) => {
                             <a href={question.tweetURL}></a>
                         </blockquote>
                         <div>{question.bio}</div>
+
+                        <div style={{ height: '10px' }}></div>
+
                         <div className="question-text">{question.question}</div> 
+                        <div style={{ height: '10px' }}></div>
+
 
 
                         {question.tweetboolean && (
@@ -127,7 +132,7 @@ const Card = (props) => {
                                 Learn More tweet
                             </a>
                         )}
-
+                        <div style={{ height: '10px' }}></div>
 
                         {question.contentboolean && (
                            
@@ -141,7 +146,7 @@ const Card = (props) => {
                             </a>
                         )}
 
-
+                        <div style={{ height: '10px' }}></div>
                         <input
                             type="range"
                             min="-3"
