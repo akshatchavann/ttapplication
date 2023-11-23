@@ -59,6 +59,30 @@ const Card = (props) => {
         } catch (error) {
             console.error(error);
         }
+
+        try { 
+            // Second PUT request to update question ratings
+            const questionResponse = await fetch(`https://ttapplication-backend.vercel.app/api/questions/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    ratings, // Include the ratings object for questions
+                ),
+            });
+
+            if (!questionResponse.ok) {
+                const errorData = await questionResponse.json();
+                setError(errorData.message);
+            } else {
+                console.log('Question ratings submitted successfully');
+            }
+
+            alert('Opinion captured! Click the "Profile" button to see more.');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
