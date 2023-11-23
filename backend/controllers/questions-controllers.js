@@ -76,7 +76,7 @@ const deleteQuestionByID = async (req, res, next) => {
 };
 
 const getQuestionbyID = async (req, res, next) => {
-  const questionId = req.params.id; // Get the ID from the request parameters
+  const questionId = req.params.qid; // Get the ID from the request parameters
 
   try {
       const question = await Question.findById(questionId);
@@ -124,6 +124,7 @@ const updateFullQuestionbyID = async (req, res, next) => {
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
 exports.updateQuestionbyID = updateQuestionbyID;
+exports.getQuestionbyID = getQuestionbyID;
 
 exports.deleteQuestionByID = deleteQuestionByID;
 

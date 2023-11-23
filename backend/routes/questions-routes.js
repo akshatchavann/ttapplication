@@ -13,4 +13,6 @@ router.put('/update', questionsControllers.updateQuestionbyID);
 
 router.delete('/delete/:qid', questionsControllers.deleteQuestionByID);
 
+router.get('/:qid', questionsControllers.getQuestionbyID);
+
 module.exports = router;
