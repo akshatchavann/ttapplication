@@ -11,6 +11,6 @@ router.post('/create', questionsControllers.createQuestion);
 
 router.put('/update', questionsControllers.updateQuestionbyID);
 
-router.deleteQuestionByID('/delete/:qid', questionsControllers.deleteQuestionByID);
+router.delete('/delete/:qid', questionsControllers.deleteQuestionByID);
 
 module.exports = router;
