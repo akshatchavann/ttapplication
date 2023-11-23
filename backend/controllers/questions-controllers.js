@@ -58,26 +58,28 @@ const updateQuestionbyID = async (req, res, next) => {
     }
   };
 
-const deleteQuestionByID = async (req, res, next) => {
-  const questionId = req.params.qid; // Get the ID from the request parameters
+  const deleteQuestionByID = async (req, res, next) => {
+    const questionId = req.params.qid; // Get the ID from the request parameters
 
-  try {
-      const deletedQuestion = await Question.findByIdAndRemove(questionId);
+    try {
+        const question = await Question.findById(questionId);
 
-      if (!deletedQuestion) {
-          console.log('No question found with ID:', questionId); // Log if no question is found
-          return res.status(404).json({ message: 'Question not found' });
-      }
+        if (!question) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
 
-      res.status(200).json({ message: 'Question deleted successfully' });
-  } catch (error) {
-      console.error('Error deleting question:', error); // Detailed error log
-      res.status(500).json({ 
-          message: 'Failed to delete the question', 
-          error: error.message // Include the error message in the response
-      });
-  }
+        await question.remove(); // Remove the found document
+
+        res.status(200).json({ message: 'Question deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting question:', error);
+        res.status(500).json({ 
+            message: 'Failed to delete the question', 
+            error: error.message 
+        });
+    }
 };
+
 
 
 const getQuestionbyID = async (req, res, next) => {
