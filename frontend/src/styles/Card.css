@@ -10,9 +10,8 @@
     margin-top: 5px;
 }
 
-.rating-labels span {
-    flex: 1;
-    text-align: center;
+.slider-labels span {
+    max-width: 100px; /* Set a max width for each span */
 }
 
 /* Slider container */

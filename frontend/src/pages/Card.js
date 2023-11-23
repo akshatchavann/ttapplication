@@ -9,7 +9,17 @@ import "../styles/Card.css";
 
 
 const Card = (props) => {
-    const [ratings, setRatings] = useState({});
+    const [ratings, setRatings] = useState(() => {
+        if (props.info && props.info.length > 0) {
+            return {
+                id: props.info[0]._id, // Assuming '_id' is the field for the question ID
+                qs: props.info[0].question, // Assuming 'question' is the field for the question text
+                ans: 0 // Initialize answer as 0
+            };
+        }
+        return {};
+    });
+
     const [error, setError] = useState(null);
     const { email } = useParams();
 
