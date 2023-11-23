@@ -9,6 +9,8 @@ import UserLogin from './pages/UserLogin.js';
 import Content from './pages/Content';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
+import AdminPortal from './pages/AdminPortal';
+import Question from './pages/Question.js';
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
           <Route path="/Content/:email" element={<Content />} />
           <Route path="/Profile/:email" element={<Profile />} />
           <Route path="/Admin" element={<Admin />} /> 
+          <Route path="/AdminPortal" element={<AdminPortal />} />
+          <Route path="Question/:id" element={<Question />} />
+          
         </Routes>
       </BrowserRouter>
     </div>

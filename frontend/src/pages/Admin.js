@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
   const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetboolean: false, tweetURL: '', contentboolean:false, contentURL:'', password: '' , left: '', right: '',mid: ''});
@@ -48,7 +49,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div>Admin goes here</div>
+      <div>Admin can create questions here</div>
       <form onSubmit={handleSubmit}>
         <div className='fieldContainer'>
 
@@ -182,6 +183,9 @@ const Admin = () => {
             </label>
             </div>
             <button type="submit" className='submitButton'>Submit</button>
+            <Link to={`/AdminPortal`}>
+                <button>See all Questions</button>
+            </Link>
         </div>
     </form>
 
