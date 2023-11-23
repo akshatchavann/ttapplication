@@ -95,7 +95,7 @@ const getQuestionbyID = async (req, res, next) => {
 
 
 const updateFullQuestionbyID = async (req, res, next) => {
-  const questionId = req.params.id;
+  const questionId = req.params.qid;
   const { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right } = req.body;
 
   try {
@@ -125,6 +125,6 @@ exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
 exports.updateQuestionbyID = updateQuestionbyID;
 exports.getQuestionbyID = getQuestionbyID;
-
+exports.updateFullQuestionbyID = updateFullQuestionbyID;
 exports.deleteQuestionByID = deleteQuestionByID;
 
