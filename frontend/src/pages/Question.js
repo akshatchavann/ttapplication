@@ -123,6 +123,11 @@ const Question = () => {
     };
 
     const handleDelete = async () => {
+        if (formData.password !== 'asdfAc12345') {
+            setError('Invalid password');
+            return;
+        }
+
         const confirmDelete = window.confirm('Are you sure you want to delete this question?');
         if (confirmDelete) {
             try {
