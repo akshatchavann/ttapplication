@@ -22,6 +22,7 @@
 
 .button-container {
     margin: 0 10px;
+    color: black;
 }
 
 .nav-link {
@@ -32,6 +33,6 @@
     padding: 5px 10px;
     border: none;
     background-color: #22c669;
-    color: white;
+    color: rgb(0, 0, 0);
     cursor: pointer;
 }
