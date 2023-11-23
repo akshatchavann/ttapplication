@@ -7,8 +7,14 @@ const router = express.Router();
 
 router.get('/', questionsControllers.getQuestions);
 
+router.get('/:id', questionsControllers.getQuestionbyID);
+
 router.post('/create', questionsControllers.createQuestion);
 
 router.put('/update', questionsControllers.updateQuestionbyID);
+
+router.put('/update/:id', questionsControllers.updateFullQuestionbyID)
+
+router.delete('/delete/:id', questionsControllers.deleteQuestionByID);
 
 module.exports = router;

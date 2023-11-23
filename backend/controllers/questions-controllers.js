@@ -57,8 +57,32 @@ const updateQuestionbyID = async (req, res, next) => {
       next(error);
     }
   };
+
+  const deleteQuestionByID = async (req, res, next) => {
+    const questionId = req.params.id; // Get the ID from the request parameters
+
+    try {
+        const deletedQuestion = await Question.findByIdAndRemove(questionId);
+
+        if (!deletedQuestion) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+
+        res.status(200).json({ message: 'Question deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to delete the question' });
+    }
+};
+
+const getQuestionbyID = async (req, res, next) => {
+  
+
+
+
   
 
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
 exports.updateQuestionbyID = updateQuestionbyID;
+exports.deleteQuestionByID = deleteQuestionByID;
