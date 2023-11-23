@@ -79,7 +79,6 @@ const Card = (props) => {
                 console.log('Question ratings submitted successfully');
             }
 
-            alert('Opinion captured! Click the "Profile" button to see more.');
         } catch (error) {
             console.error(error);
         }
