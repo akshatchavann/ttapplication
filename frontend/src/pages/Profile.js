@@ -49,18 +49,20 @@ const Profile = () => {
 
     console.log(ProfileInformation)
 
-    const calculateAverageAnswer = (question) => {
-      const questionData = questionsResponseData.find((q) => q.question === question);
+    const calculateAverageAnswer = (questionId) => {
+      const questionData = questionsResponseData.find((q) => q._id === questionId);
     
-      if (questionData) {
-        const answers = questionData.answers.map(Number); // Convert answer strings to numbers
-        const sum = answers.reduce((total, answer) => total + answer, 0);
-        const average = sum / answers.length;
-        return isNaN(average) ? 'N/A' : average.toFixed(2); // Display 'N/A' if the average is not a number
+      if (questionData && questionData.answers.length > 0) {
+        const answers = questionData.answers.map(Number); // Convert answer strings to numbers, filter out any non-numeric values
+        const validAnswers = answers.filter((answer) => !isNaN(answer));
+        const sum = validAnswers.reduce((total, answer) => total + answer, 0);
+        const average = sum / validAnswers.length;
+        return average.toFixed(2); // Display the average to 2 decimal places
       }
     
-      return 'N/A'; // Return 'N/A' if the question is not found in questionsResponse
+      return 'N/A'; // Return 'N/A' if the question is not found or there are no valid answers
     };
+    
 
     return (
       <div>
