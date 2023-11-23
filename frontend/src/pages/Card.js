@@ -171,8 +171,6 @@ const Card = (props) => {
                             <span></span>
                             <span>{question.mid}</span>
                             <span></span>
-
-
                             <span></span>
                             <span>{question.right}</span>
                         </div>                
