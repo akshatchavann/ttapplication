@@ -28,3 +28,4 @@ const createRecc = async (req, res, next) => {
 };
 
 exports.getReccs = getReccs;
+exports.createRecc = createRecc;
