@@ -20,7 +20,7 @@ const createQuestion = async (req, res, next) => {
       );
     }
   
-    const { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left } = req.body; // Assuming your request body contains 'question' and 'category'
+    let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left } = req.body; // Assuming your request body contains 'question' and 'category'
 
     category = category.split(',').map(cat => cat.trim());
     
@@ -104,7 +104,7 @@ const getQuestionbyID = async (req, res, next) => {
 
 const updateFullQuestionbyID = async (req, res, next) => {
   const questionId = req.params.qid;
-  const { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right } = req.body;
+  let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right } = req.body;
   category = category.split(',').map(cat => cat.trim());
   try {
       // Blind update: the request body is assumed to contain all the necessary fields
