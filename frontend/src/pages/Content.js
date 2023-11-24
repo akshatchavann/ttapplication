@@ -15,6 +15,7 @@ const Content = () => {
     const [error, setError] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0); 
 
+    
     useEffect(() => {
         const fetchQuestionsAndUserIndex = async () => {
             try {
