@@ -186,6 +186,9 @@ const Admin = () => {
             <Link to={`/AdminPortal`}>
                 <button>See all Questions</button>
             </Link>
+            <Link to={`/AdminHome`}>
+                <button>Back to Admin Home</button>
+            </Link>
         </div>
     </form>
 

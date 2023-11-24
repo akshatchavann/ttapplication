@@ -37,6 +37,9 @@ const AdminPortal = () => {
                     <QuestionCard key={question._id} question={question} />
                 ))}
             </div>
+            <Link to={`/AdminHome`}>
+                <button>Back to Admin Home</button>
+            </Link>
         </div>
     );
 }

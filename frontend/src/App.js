@@ -11,6 +11,8 @@ import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import AdminPortal from './pages/AdminPortal';
 import Question from './pages/Question.js';
+import AdminReccs from './pages/AdminReccs.js';
+import AdminHome from './pages/AdminHome.js';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/Admin" element={<Admin />} /> 
           <Route path="/AdminPortal" element={<AdminPortal />} />
           <Route path="Question/:id" element={<Question />} />
+          <Route path="/AdminReccs" element={<AdminReccs />} />
+          <Route path="/AdminHome" element={<AdminHome />} />
           
         </Routes>
       </BrowserRouter>

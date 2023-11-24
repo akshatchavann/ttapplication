@@ -20,9 +20,6 @@ const QuestionCard = (props) => {
             <Link to={`/Question/${questionId}`}>
                 <button>Edit</button>
             </Link>
-            <Link to={`/Admin`}>
-                <button>Back to Admin</button>
-            </Link>
         </div>
     );
 }
