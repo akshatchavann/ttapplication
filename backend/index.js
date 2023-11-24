@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const usersRoutes = require('./routes/users-routes');
 const questionsRoutes = require('./routes/questions-routes');
+const reccsRoutes = require('./routes/reccs-routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
@@ -28,10 +29,7 @@ app.get('/', (req, res) => {
 //routes
 app.use('/api/users', usersRoutes);
 app.use('/api/questions', questionsRoutes);
-
-
-
-
+app.use('/api/reccs', reccsRoutes);
 
 
 
