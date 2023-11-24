@@ -3,7 +3,13 @@ const { validationResult } = require('express-validator');
 const Recc = require('../models/reccs-model');
 
 const getReccs = async (req, res, next) => {
-    res.send('Hello World!')
+    try {
+        const reccs = await Recc.find({}); // Use the `find` method to get all reccs
+        res.status(200).json({ reccs }); // Send the reccs as JSON response
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to retrieve reccs' });
+    }
 }
 
 const createRecc = async (req, res, next) => {
