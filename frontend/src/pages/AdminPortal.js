@@ -30,7 +30,6 @@ const AdminPortal = () => {
 
     return (
         <div className="main">
-            <Header />
             <div><strong>Questions</strong></div>
             <div>
                 {questions.map((question) => (

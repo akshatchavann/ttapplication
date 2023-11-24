@@ -13,6 +13,7 @@ import AdminPortal from './pages/AdminPortal';
 import Question from './pages/Question.js';
 import AdminReccs from './pages/AdminReccs.js';
 import AdminHome from './pages/AdminHome.js';
+import UserContent from './pages/UserContent.js';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="Question/:id" element={<Question />} />
           <Route path="/AdminReccs" element={<AdminReccs />} />
           <Route path="/AdminHome" element={<AdminHome />} />
+          <Route path="/UserContent/:email" element={<UserContent />} />
           
         </Routes>
       </BrowserRouter>
