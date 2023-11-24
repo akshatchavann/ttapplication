@@ -12,10 +12,11 @@ const CompletedPage = () => {
             <div style={{ height: '10px' }}></div>
             <div className="maintext"> In the meantime, click <Link className='prof' to={`/Profile/${email}`}>Profile</Link> to see your answers to previous questions. </div>
             <div style={{ height: '10px' }}></div>
-            <div> Want to submit a reccomendation for content? Click the button below!</div>
-            <Link to={`/UserContent/${email}`}>
-                <button>Submit Reccomendations</button>
-            </Link>
+            <div> 
+                Want to submit a recommendation for content? Click 
+                <Link className="prof" to={`/UserContent/${email}`}> here </Link> 
+                to submit recommendations!
+            </div>
         </div>
     );
 }
