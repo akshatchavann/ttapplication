@@ -61,9 +61,9 @@ const Card = (props) => {
                 setError(errorData.message);
             
             } else {
-                console.log('Opinion captured! Click Profile to see how your views compared to other users.');
+                console.log('Opinion captured! Click Profile to see how your views compared to other users');
                 props.onNext && props.onNext();
-                alert('Opinion captured! Click Profile to see how your views compared to other users.');
+                alert('Opinion captured! Click Profile to see how your views compared to other users');
 
             }
         } catch (error) {
