@@ -61,9 +61,9 @@ const Card = (props) => {
                 setError(errorData.message);
             
             } else {
-                console.log('Opinion captured! Click the "Profile" button to see more.');
+                console.log('Opinion captured! Click Profile to see how your views compared to other users.');
                 props.onNext && props.onNext();
-                alert('Opinion captured! Click the "Profile" button to see more.');
+                alert('Opinion captured! Click Profile to see how your views compared to other users.');
 
             }
         } catch (error) {
@@ -139,7 +139,7 @@ const Card = (props) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Learn More tweet
+                                See this News Story
                             </a>
                         )}
                         <div style={{ height: '10px' }}></div>
@@ -152,7 +152,7 @@ const Card = (props) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Learn More
+                                See this News Story
                             </a>
                         )}
 

@@ -10,7 +10,7 @@ const CompletedPage = () => {
 
             <div className="maintext"> Check back soon for fresh questions that reflect the news of the day! </div>
             <div style={{ height: '10px' }}></div>
-            <div className="maintext"> In the meantime, click <Link className='prof' to={`/Profile/${email}`}>Profile</Link> to see your answers to previous questions. </div>
+            <div className="maintext"> In the meantime, click <Link className='prof' to={`/Profile/${email}`}>Profile</Link> to see how your views compared to other users. </div>
             <div style={{ height: '10px' }}></div>
             <div> 
                 Want to submit a recommendation for content? Click 
