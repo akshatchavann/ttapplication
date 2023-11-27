@@ -58,6 +58,7 @@ const UserContent = () => {
                         value={formData.topic} 
                         placeholder="Topic example = “Immigration” "
                         onChange={handleInputChange} 
+                        style={{ height: '25px', width: '100%' }}
                     />
                 </div>
 
@@ -70,6 +71,7 @@ const UserContent = () => {
                         value={formData.questions} 
                         placeholder="Question = Should people seeking asylum be welcomed into the U.S. or made to wait elsewhere while they are processed? "
                         onChange={handleInputChange} 
+                        style={{ height: '25px', width: '100%' }}
                     />
                 </div>
 
@@ -82,6 +84,7 @@ const UserContent = () => {
                         value={formData.links} 
                         onChange={handleInputChange} 
                         placeholder="Link = www.cnn.com/specificstory)"
+                        style={{ height: '25px', width: '100%' }}
                     />
                 </div>
                 <div style={{ height: '10px' }}></div>
