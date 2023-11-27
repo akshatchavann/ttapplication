@@ -56,7 +56,7 @@ const UserContent = () => {
                     <textarea 
                         name="topic" 
                         value={formData.topic} 
-                        placeholder="Example Topics(Optional)"
+                        placeholder="Topic example = “Immigration” "
                         onChange={handleInputChange} 
                     />
                 </div>
@@ -68,7 +68,7 @@ const UserContent = () => {
                     <textarea 
                         name="questions" 
                         value={formData.questions} 
-                        placeholder="Example Questions(Optional)"
+                        placeholder="Question = Should people seeking asylum be welcomed into the U.S. or made to wait elsewhere while they are processed? "
                         onChange={handleInputChange} 
                     />
                 </div>
@@ -81,7 +81,7 @@ const UserContent = () => {
                         name="links" 
                         value={formData.links} 
                         onChange={handleInputChange} 
-                        placeholder="Example Links(Optional)"
+                        placeholder="Link = www.cnn.com/specificstory)"
                     />
                 </div>
                 <div style={{ height: '10px' }}></div>
