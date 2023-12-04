@@ -15,7 +15,7 @@
 
 .chart-container {
     width: 50%;   /* Adjust the width as needed */
-    height: 50%; /* Adjust the height as needed */
+    height: 200px; /* Adjust the height as needed */
     margin: auto;  /* Centers the chart if the container is smaller than the parent */
   }
   
