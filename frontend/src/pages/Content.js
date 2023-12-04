@@ -113,7 +113,7 @@ const Content = () => {
 
             
             {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length > currentIndex && (
-                <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} onNext={handleNextClick} len={`${currentIndex + 1} out of ${loadedQuestion.length} total questiions`} />
+                <Card key={currentIndex} info={[loadedQuestion[currentIndex]]} onNext={handleNextClick} len={`(Question ${currentIndex + 1} of ${loadedQuestion.length})`} />
             )}
 
             {loadedQuestion && loadedQuestion.length > 0 && loadedQuestion.length <= currentIndex && (
