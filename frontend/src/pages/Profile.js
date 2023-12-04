@@ -50,7 +50,7 @@ const Profile = () => {
         sendRequest();
       }, []);
 
-    console.log(ProfileInformation)
+    console.log(questionsResponseData)
 
     const calculateAverageAnswer = (questionText) => {
       // Find the question data using question text
@@ -114,13 +114,12 @@ const Profile = () => {
     };
     
 
-    const generateChartData = (adjArray) => {
-
+    const generateChartData = (adjArray, highlightAnswer) => {
       if (!adjArray) {
         return {
           labels: [],
           datasets: [{
-            label: 'Count of Answers',
+            label: '',
             data: [],
             backgroundColor: 'rgba(0, 123, 255, 0.5)',
             borderColor: 'rgba(0, 123, 255, 1)',
@@ -128,21 +127,45 @@ const Profile = () => {
           }],
         };
       }
+    
       // Extract labels and data from the array
       const labels = adjArray.map(item => item.answer);
       const data = adjArray.map(item => item.count);
+      const backgroundColors = adjArray.map(item => item.answer === highlightAnswer ? 'rgba(255, 255, 0, 0.5)' : 'rgba(0, 0, 255, 0.5)');
     
       return {
         labels: labels,
         datasets: [{
-          label: 'Count of Answers',
+          label: 'Answer Count',
           data: data,
-          backgroundColor: 'rgba(0, 123, 255, 0.5)',
-          borderColor: 'rgba(0, 123, 255, 1)',
+          backgroundColor: backgroundColors,
+          borderColor: 'rgba(0, 0, 255, 1)',
           borderWidth: 1,
         }],
       };
     };
+
+    const findLabels = (questionText) => {
+      // Initialize default labels
+      let leftLabel = '';
+      let midLabel = '';
+      let rightLabel = '';
+    
+      // Find the question in the questionsResponseData
+      const questionData = questionsResponseData.find(q => q.question === questionText);
+    
+      if (questionData) {
+        // Assuming the labels are stored in a property of questionData, e.g., labels
+        leftLabel = questionData.left;
+        midLabel = questionData.mid;
+        rightLabel = questionData.right;
+      }
+    
+      // Return the labels
+      return { leftLabel, midLabel, rightLabel };
+    };
+    
+    
     
     
 
@@ -159,20 +182,27 @@ const Profile = () => {
             <div>
               <h2>Questions and Answers</h2>
               {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => {
+                console.log(question)
                 const adjList = calculateAdjListofAnswers(question); // this is an object
                 const adjarray = renderAdjacencyList(adjList);// this is an array
-                console.log(adjarray);
-
+                const { leftLabel, midLabel, rightLabel } = findLabels(question);
+                console.log(leftLabel, midLabel, rightLabel)
                 return (
                   <div key={index}>
                     <p><strong>Question:</strong> {question}</p>
                     <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index]}</p>
+
                     <div className="chart-container">
-                      <Bar data={generateChartData(adjarray)} />
+                      <Bar data={generateChartData(adjarray, ProfileInformation.answers && (ProfileInformation.answers[index] !== undefined && ProfileInformation.answers[index] !== null) ? String(ProfileInformation.answers[index]) : '')} />
                     </div>
+                    <div className="label-container">
+                      <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
+                    </div>
+
                     <div style={{ height: '10px' }}></div>
                     <>---------------------------------------------------</>
                   </div>
+
                 );
               })}
             </div>

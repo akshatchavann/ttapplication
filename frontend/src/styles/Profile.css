@@ -19,3 +19,8 @@
     margin: auto;  /* Centers the chart if the container is smaller than the parent */
   }
   
+  .label-container {
+    text-align: center; /* Center the text */
+    margin-top: 10px; /* Optional: add some space between the chart and labels */
+  }
+  
