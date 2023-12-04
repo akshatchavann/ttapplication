@@ -75,8 +75,8 @@ const UserLogin = () => {
             
             <div className="wrapperSignIn">
                 <button className="btn btn-primary mt-10" type="submit">Submit</button>
-                <Link className="create-account-link" to={"/UserSignup"}><strong>Create Account</strong></Link>
             </div>
+            <Link className="create-account-link" to={"/UserSignup"}><strong>Create Account</strong></Link>
         </form>
         </div>
         </div>

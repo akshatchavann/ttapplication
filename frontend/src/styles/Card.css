@@ -101,3 +101,16 @@
 }
 
 
+.props-length-display {
+  text-align: center; /* Center the text inside the div */
+  width: 100%; /* Optional: set the width of the div */
+  margin-top: 20px; /* Optional: add some space above the div */
+}
+
+/* If you want to center the div in the middle of the page */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -63,7 +63,6 @@ const Card = (props) => {
             } else {
                 console.log('Opinion captured! Click Profile to see how your views compared to other users');
                 props.onNext && props.onNext();
-                alert('Opinion captured! Click Profile to see how your views compared to other users');
 
             }
         } catch (error) {
@@ -114,6 +113,7 @@ const Card = (props) => {
         return { marginTop: hasActiveLinks ? '0px' : '250px' };
     };
 
+    console.log(props.len)
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (
@@ -192,9 +192,13 @@ const Card = (props) => {
                         <div className="currans">
                             Current Answer: {ratings.ans || '0'}
                         </div>
+
                     </div>
                 ))}
                 <button className="sub" type="submit">Submit</button>
+                <div className="props-length-display">
+                    {props.len}
+                </div>
             </form>
         ) : (
             <p>No questions available.</p>
