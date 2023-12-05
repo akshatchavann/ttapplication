@@ -14,7 +14,6 @@ const Content = () => {
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0); 
-
     
     useEffect(() => {
         const fetchQuestionsAndUserIndex = async () => {
@@ -25,7 +24,9 @@ const Content = () => {
                 if (!questionsResponse.ok) {
                     throw new Error(questionsData.message);
                 }
-                setLoadedQuestion(questionsData.questions);
+                const cleanData = cleanQuestionData(questionsData.questions)
+    
+                setLoadedQuestion(cleanData);
     
                 // Fetch user's question index
                 const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
@@ -33,18 +34,40 @@ const Content = () => {
                     throw new Error('Could not fetch user data');
                 }
                 const userData = await userResponse.json();
-                const dbQuestionIndex = userData.user.questionindex; // assuming the response has a questionindex field
-
-
-                setCurrentIndex(userData.user.questionindex); // Set the index based on the user's progress
+                let dbQuestionIndex = userData.user.questionindex;
+    
+                if (dbQuestionIndex > cleanData.length) {
+                    console.log("sent")
+                    // Update the user object with the new question index
+                    const updatedUser = { ...userData.user, questionindex: cleanData.length };
+                    console.log(updatedUser)
+                    
+                    const putResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/fullupdate/${email}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedUser),
+                    });
+    
+                    if (!putResponse.ok) {
+                        throw new Error('Could not update user question index');
+                    } else {
+                        dbQuestionIndex = cleanData.length;
+                        console.log("updated")
+                        console.log(dbQuestionIndex)
+                    }
+                }
+    
+                setCurrentIndex(dbQuestionIndex);
             } catch (error) {
                 setError(error.message || 'Something went wrong');
             }
         };
     
         fetchQuestionsAndUserIndex();
-    }, [email]);
-
+    }, [email, setLoadedQuestion, setError]);
+    
       const handleNextClick = async () => {
         try {
             // Make a GET request to fetch the current questionindex for the user
@@ -84,6 +107,9 @@ const Content = () => {
         }
     };
     
+    const cleanQuestionData = (questionsArray) => {
+        return questionsArray.filter(question => question.display === true);
+    };    
     
     const handlePrevClick = () => {
         if (currentIndex > 0) {
@@ -102,7 +128,6 @@ const Content = () => {
         return { paddingTop: hasActiveLinks ? '200px' : '0px', height: '100px' };
     };
 
-    
 
     return (
 
