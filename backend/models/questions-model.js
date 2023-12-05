@@ -13,6 +13,7 @@ const questionSchema = new Schema({
     left: { type: String, required: true },
     mid: { type: String, required: true },
     right: { type: String, required: true },
+    display: { type: Boolean, required: true },
 });
 
 

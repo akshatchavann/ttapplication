@@ -25,7 +25,7 @@ const createQuestion = async (req, res, next) => {
     category = category.split(',').map(cat => cat.trim());
     
     try {
-        const newQuestion = new Question({ question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left });
+        const newQuestion = new Question({ question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left, display: true });
         const savedQuestion = await newQuestion.save();
 
         res.status(201).json(savedQuestion); // Send the created question as JSON response with a 201 status code
