@@ -190,14 +190,19 @@ const Profile = () => {
                 return (
                   <div key={index}>
                     <p><strong>Question:</strong> {question}</p>
-                    <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index]}</p>
+                    <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index] === 4 ? 'Question Skipped' : ProfileInformation.answers[index]}</p>
 
-                    <div className="chart-container">
-                      <Bar data={generateChartData(adjarray, ProfileInformation.answers && (ProfileInformation.answers[index] !== undefined && ProfileInformation.answers[index] !== null) ? String(ProfileInformation.answers[index]) : '')} />
-                    </div>
-                    <div className="label-container">
-                      <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
-                    </div>
+                    {ProfileInformation.answers && ProfileInformation.answers[index] !== 4 && (
+                        <>
+                          <div className="chart-container">
+                            <Bar data={generateChartData(adjarray, String(ProfileInformation.answers[index]))} />
+                          </div>
+                          <div className="label-container">
+                            <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
+                          </div>
+                        </>
+                      )}
+
 
                     <div style={{ height: '10px' }}></div>
                     <>---------------------------------------------------</>
@@ -205,7 +210,7 @@ const Profile = () => {
 
                 );
               })}
-            </div>
+            </div> 
           </div>
         </div>
       </div>

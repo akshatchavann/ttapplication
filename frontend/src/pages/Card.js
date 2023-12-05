@@ -113,10 +113,39 @@ const Card = (props) => {
         return { marginTop: hasActiveLinks ? '0px' : '250px' };
     };
 
-    console.log(props.len)
+    const handleSkipButton = async (e) => {
+        e.preventDefault();
+    
+        try {
+            // Update the ratings object with a hardcoded value for 'ans' when skipped
+            const updatedRatings = { ...ratings, ans: 4 };
+    
+            // PUT request to update user ratings
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedRatings),
+            });
+    
+            if (!userResponse.ok) {
+                const errorData = await userResponse.json();
+                setError(errorData.message);
+            } else {
+                console.log('Opinion captured! Click Profile to see how your views compared to other users');
+                props.onNext && props.onNext();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
+    console.log(ratings);
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (
+            <div>
             <form onSubmit={handleSubmitRatings}>
                 {props.info.map((question, index) => (
                     <div key={index} className="question">
@@ -200,6 +229,12 @@ const Card = (props) => {
                     {props.len}
                 </div>
             </form>
+            <div style={{ height: '10px' }}></div>
+            <div className="button-container">
+                <button className="skip" onClick={handleSkipButton}>Skip Question</button>
+            </div>
+            </div>
+            
         ) : (
             <p>No questions available.</p>
         )}
