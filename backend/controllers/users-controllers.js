@@ -178,8 +178,6 @@ const getUserbyEmail = async (req, res, next) => {
 }
 
 
-const User = require('../models/user'); // Replace with the path to your User model
-
 const fullUserUpdate = async (req, res) => {
     const userEmail = req.params.uemail; // Retrieve the email from the URL parameter
     const updatedData = req.body;
