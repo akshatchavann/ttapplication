@@ -110,7 +110,7 @@ const updateFullQuestionbyID = async (req, res, next) => {
       // Blind update: the request body is assumed to contain all the necessary fields
       const updatedQuestion = await Question.findByIdAndUpdate(
           questionId,
-          { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right },
+          { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right, display: true },
           { new: true, runValidators: true }
       );
 
