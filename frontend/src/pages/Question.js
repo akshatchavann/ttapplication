@@ -29,19 +29,21 @@ const Question = () => {
             try {
                 const response = await fetch(`https://ttapplication-backend.vercel.app/api/questions/${id}`);
                 const data = await response.json();
+                console.log(data)
                 if (response.ok) {
                     // Set the form data with the question data
+                    console.log(formData)
                     setFormData({
-                        question: data.question.question,
-                        bio: data.question.bio,
-                        category: data.question.category,
-                        tweetboolean: data.question.tweetboolean,
-                        tweetURL: data.question.tweetURL,
-                        contentboolean: data.question.contentboolean,
-                        contentURL: data.question.contentURL,
-                        left: data.question.left,
-                        mid: data.question.mid,
-                        right: data.question.right
+                        question: data.question.question || '',
+                        bio: data.question.bio || '',
+                        category: data.question.category || '',
+                        tweetboolean: data.question.tweetboolean || false,
+                        tweetURL: data.question.tweetURL || '',
+                        contentboolean: data.question.contentboolean || false,
+                        contentURL: data.question.contentURL || '',
+                        left: data.question.left || '',
+                        mid: data.question.mid || '',
+                        right: data.question.right || ''
                     });
                 } else {
                     throw new Error(data.message || "Failed to fetch question data");
@@ -54,7 +56,7 @@ const Question = () => {
 
         fetchQuestionData();
     }, [id]);
-
+    console.log("uo", formData)
     const handleInputChange = (e) => {
         const { name, type, checked, value } = e.target;
     
@@ -72,7 +74,7 @@ const Question = () => {
     
 
 
-    console.log(formData);
+
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevent default form submission behavior
 
@@ -82,10 +84,11 @@ const Question = () => {
         }
 
         // Construct the request body using the formData state
+
         const body = JSON.stringify({
             question: formData.question,
             bio: formData.bio,
-            category: formData.category,
+            category: formData.category.join(', '),
             tweetboolean: formData.tweetboolean,
             tweetURL: formData.tweetURL,
             contentboolean: formData.contentboolean,
@@ -120,7 +123,7 @@ const Question = () => {
             console.error('Error updating question:', error);
             setError('Failed to update the question.');
         }
-    };
+        };
 
     const handleDelete = async () => {
         if (formData.password !== 'asdfAc12345') {
@@ -130,27 +133,45 @@ const Question = () => {
 
         const confirmDelete = window.confirm('Are you sure you want to delete this question?');
         if (confirmDelete) {
+            const body2 = JSON.stringify({
+                question: formData.question,
+                bio: formData.bio,
+                category: formData.category.join(', '),
+                tweetboolean: formData.tweetboolean,
+                tweetURL: formData.tweetURL,
+                contentboolean: formData.contentboolean,
+                contentURL: formData.contentURL,
+                left: formData.left,
+                mid: formData.mid,
+                right: formData.right,
+                display: false
+            });
             try {
-                const response = await fetch(`https://ttapplication-backend.vercel.app/api/questions/delete/${id}`, {
-                    method: 'DELETE',
+                // Send a PUT request with the form data
+                const response = await fetch(`https://ttapplication-backend.vercel.app/api/questions/update/${id}`, {
+                    method: 'PUT',
                     headers: {
-                        // Include any necessary headers, such as content type or authentication tokens
                         'Content-Type': 'application/json',
+                        // Include any other headers your API expects, such as authentication tokens
                     },
+                    body: body2
                 });
-
+    
+                const data = await response.json();
+    
                 if (response.ok) {
-                    alert('Question deleted successfully.');
-                    // Optionally, redirect or perform additional actions after successful deletion
+                    // Alert the user that the update was successful
+                    alert('Question updated successfully!');
                 } else {
-                    const data = await response.json();
-                    alert(data.message || 'Failed to delete the question.');
+                    // Alert the user that there was an error with the update
+                    alert(data.message || 'Failed to update the question.');
                 }
             } catch (error) {
-                console.error('Error deleting question:', error);
-                alert('An error occurred while trying to delete the question.');
+                // If there is an error, log it and set the error state
+                console.error('Error updating question:', error);
+                setError('Failed to update the question.');
             }
-        }
+            };
     };
 
 
@@ -290,13 +311,14 @@ const Question = () => {
                 />
             </label>
             </div>
-            <button type="submit" className='submitButton'>Submit Edits</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button type="submit" className='submitButton' onClick={handleSubmit}>Submit Edits</button>
+
             <Link to={`/AdminPortal`}>
                 <button>Back to all Questions</button>
             </Link>
         </div>
     </form>
+    <button onClick={handleDelete}>Delete</button>
 
       
       {error && <p>{error}</p>}
