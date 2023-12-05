@@ -18,6 +18,8 @@ router.get('/:uemail', usersControllers.getUserbyEmail);
 
 router.put('/increasequestion/:uemail', usersControllers.increaseQuestionIndex);
 
+router.put('/fullupdate/:uemail', usersControllers.fullUserUpdate);
+
 
 
 module.exports = router;

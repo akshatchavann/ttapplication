@@ -178,9 +178,30 @@ const getUserbyEmail = async (req, res, next) => {
 }
 
 
-  
-  
+const User = require('../models/user'); // Replace with the path to your User model
 
+const fullUserUpdate = async (req, res) => {
+    const userEmail = req.params.uemail; // Retrieve the email from the URL parameter
+    const updatedData = req.body;
+
+    try {
+        // Find the user by email and update
+        const updatedUser = await User.findOneAndUpdate({ email: userEmail }, updatedData, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error updating user' });
+    }
+};
+
+  
+  
+exports.fullUserUpdate = fullUserUpdate;
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
