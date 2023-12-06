@@ -141,7 +141,6 @@ const Card = (props) => {
         }
     }
     
-    console.log(ratings);
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (
@@ -168,7 +167,7 @@ const Card = (props) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                See this News Story
+                                See this Tweet
                             </a>
                         )}
                         <div style={{ height: '10px' }}></div>
