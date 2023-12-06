@@ -190,7 +190,7 @@ const Profile = () => {
                 return (
                   <div key={index}>
                     <p><strong>Question:</strong> {question}</p>
-                    <p><strong>Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index] === 4 ? 'Question Skipped' : ProfileInformation.answers[index]}</p>
+                    <p><strong>Your Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index] === 4 ? 'Question Skipped' : ProfileInformation.answers[index]}</p>
 
                     {ProfileInformation.answers && ProfileInformation.answers[index] !== 4 && (
                         <>
