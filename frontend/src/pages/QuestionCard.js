@@ -16,6 +16,10 @@ const QuestionCard = (props) => {
             <div className="question-card">
                 {props.question.question}
             </div>
+            Display:
+            <div className="question-card">
+                {String(props.question.display)}
+            </div>
             <div style={{ height: '10px' }}></div>
             <Link to={`/Question/${questionId}`}>
                 <button>Edit</button>
