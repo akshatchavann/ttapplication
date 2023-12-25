@@ -104,13 +104,13 @@ const getQuestionbyID = async (req, res, next) => {
 
 const updateFullQuestionbyID = async (req, res, next) => {
   const questionId = req.params.qid;
-  let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right,display } = req.body;
+  let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right,display, creator } = req.body;
   category = category.split(',').map(cat => cat.trim());
   try {
       // Blind update: the request body is assumed to contain all the necessary fields
       const updatedQuestion = await Question.findByIdAndUpdate(
           questionId,
-          { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right, display},
+          { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right, display, creator},
           { new: true, runValidators: true }
       );
 

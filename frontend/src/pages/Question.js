@@ -20,7 +20,8 @@ const Question = () => {
         password: '',
         left: '',
         mid: '',
-        right: ''
+        right: '',
+        creator:''
     });    
     const [error, setError] = useState('');
 
@@ -43,7 +44,8 @@ const Question = () => {
                         contentURL: data.question.contentURL || '',
                         left: data.question.left || '',
                         mid: data.question.mid || '',
-                        right: data.question.right || ''
+                        right: data.question.right || '',
+                        creator: data.question.creator || ''
                     });
                 } else {
                     throw new Error(data.message || "Failed to fetch question data");
@@ -95,7 +97,8 @@ const Question = () => {
             contentURL: formData.contentURL,
             left: formData.left,
             mid: formData.mid,
-            right: formData.right
+            right: formData.right,
+            creator: formData.creator
         });
 
         try {
@@ -144,6 +147,7 @@ const Question = () => {
                 left: formData.left,
                 mid: formData.mid,
                 right: formData.right,
+                creator: formData.creator,
                 display: false
             });
             try {
@@ -181,7 +185,16 @@ const Question = () => {
       <div>Delete or do all Edits and click Submit Edit</div>
       <form onSubmit={handleSubmit}>
         <div className='fieldContainer'>
-
+        <div className='formgroup'>
+            <textarea
+                className='textarea'
+                name="creator"
+                placeholder="Your Name"
+                value={formData.creator}
+                onChange={handleInputChange}
+                style={{ height: "2em" }}
+            />
+          </div>
           <div className='formgroup'>
             <textarea
                 className='textarea'
