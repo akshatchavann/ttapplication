@@ -151,12 +151,15 @@ const Card = (props) => {
                         <blockquote className="twitter-tweet twitter-tweet-rendered">
                             <a href={question.tweetURL}></a>
                         </blockquote>
-                        <div>{question.bio}</div>
+                        <div className="question-bio">{question.bio}</div>
 
                         <div style={{ height: '10px' }}></div>
 
                         <div className="question-text">{question.question}</div> 
+                        <div className="question-creator">Posted by: {question.creator}</div>
                         <div style={{ height: '10px' }}></div>
+
+                        
 
 
 

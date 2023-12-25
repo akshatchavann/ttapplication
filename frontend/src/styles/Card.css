@@ -112,3 +112,7 @@
   text-align: center;
 }
 
+.question-bio {
+  text-align: left; /* Aligns text to the left */
+}
+

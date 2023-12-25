@@ -66,7 +66,7 @@ const Admin = () => {
             <textarea
                 className='textarea'
                 name="question"
-                placeholder="Question Name"
+                placeholder="Question"
                 value={formData.question}
                 onChange={handleInputChange}
                 style={{ height: "10em" }}
@@ -76,7 +76,7 @@ const Admin = () => {
             <textarea
                 className='textarea'
                 name="bio"
-                placeholder="Question Bio"
+                placeholder="~3 sentence description"
                 value={formData.bio}
                 onChange={handleInputChange}
                 style={{ height: "10em" }}
@@ -85,7 +85,7 @@ const Admin = () => {
           <div className='formgroup'>
             <textarea
                 name="category"
-                placeholder="Category"
+                placeholder="Category (e.g. Abortion, Israel-Palestine, Climate Change, etc.)"
                 value={formData.category}
                 onChange={handleInputChange}
             />
