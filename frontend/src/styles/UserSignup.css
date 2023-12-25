@@ -1,0 +1,15 @@
+/* Hide the up and down spinners for the number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.create-account-link {
+  color: white;
+}
+
+.mt-1{
+  color: white
+}

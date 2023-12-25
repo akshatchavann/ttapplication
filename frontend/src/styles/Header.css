@@ -1,0 +1,38 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333; /* Example: 2px solid border in dark color */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: black;
+}
+
+
+
+.left-container, .right-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    margin: 0 10px;
+    color: black;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.home-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #D1F828;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
