@@ -14,6 +14,7 @@ const questionSchema = new Schema({
     mid: { type: String, required: true },
     right: { type: String, required: true },
     display: { type: Boolean, required: true },
+    creator: { type: String, required: true },
 });
 
 

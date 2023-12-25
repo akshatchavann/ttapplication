@@ -20,12 +20,12 @@ const createQuestion = async (req, res, next) => {
       );
     }
   
-    let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left } = req.body; // Assuming your request body contains 'question' and 'category'
+    let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left,creator } = req.body; // Assuming your request body contains 'question' and 'category'
 
     category = category.split(',').map(cat => cat.trim());
     
     try {
-        const newQuestion = new Question({ question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, right, mid, left, display: true });
+        const newQuestion = new Question({ question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL,creator, right, mid, left, display: true });
         const savedQuestion = await newQuestion.save();
 
         res.status(201).json(savedQuestion); // Send the created question as JSON response with a 201 status code

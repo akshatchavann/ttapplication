@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {
-  const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetboolean: false, tweetURL: '', contentboolean:false, contentURL:'', password: '' , left: '', right: '',mid: ''});
+  const [formData, setFormData] = useState({ question: '', bio:'', category: '', tweetboolean: false, tweetURL: '', contentboolean:false, contentURL:'', password: '' , left: '', right: '',mid: '', creator:""});
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
@@ -52,7 +52,16 @@ const Admin = () => {
       <div>Admin can create questions here</div>
       <form onSubmit={handleSubmit}>
         <div className='fieldContainer'>
-
+        <div className='formgroup'>
+            <textarea
+                className='textarea'
+                name="creator"
+                placeholder="Your Name"
+                value={formData.creator}
+                onChange={handleInputChange}
+                style={{ height: "2em" }}
+            />
+          </div>
           <div className='formgroup'>
             <textarea
                 className='textarea'
