@@ -14,6 +14,8 @@ import Question from './pages/Question.js';
 import AdminReccs from './pages/AdminReccs.js';
 import AdminHome from './pages/AdminHome.js';
 import UserContent from './pages/UserContent.js';
+import DailyQuestion from './pages/DailyQuestion.js';
+import TwoOptions from './pages/TwoOptions.js';
 
 function App() {
   return (
@@ -31,7 +33,9 @@ function App() {
           <Route path="/AdminReccs" element={<AdminReccs />} />
           <Route path="/AdminHome" element={<AdminHome />} />
           <Route path="/UserContent/:email" element={<UserContent />} />
-          
+          <Route path="/DailyQuestion/:email" element={<DailyQuestion />} />
+          <Route path="/TwoOptions/:email" element={<TwoOptions />} />
+
         </Routes>
       </BrowserRouter>
     </div>
