@@ -50,7 +50,6 @@ const Profile = () => {
         sendRequest();
       }, []);
 
-    console.log(questionsResponseData)
 
     const calculateAverageAnswer = (questionText) => {
       // Find the question data using question text
@@ -167,12 +166,19 @@ const Profile = () => {
     
     
     
-    
-
+    const getProfileStyle = () => {
+      if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
+          return { marginTop: '500px' };
+      } else {
+          return { marginTop: '1000px' };
+      }
+    };
+  
+  
     return (
       <div>
         <Header />
-        <div className="profile">
+        <div className="profile" style={getProfileStyle()}>
           <h2>Profile Information</h2>
           <div className="profile-details">
             <div><strong>First Name:</strong> {ProfileInformation && ProfileInformation.firstname}</div>
@@ -182,11 +188,9 @@ const Profile = () => {
             <div>
               <h2>Questions and Answers</h2>
               {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => {
-                console.log(question)
                 const adjList = calculateAdjListofAnswers(question); // this is an object
                 const adjarray = renderAdjacencyList(adjList);// this is an array
                 const { leftLabel, midLabel, rightLabel } = findLabels(question);
-                console.log(leftLabel, midLabel, rightLabel)
                 return (
                   <div key={index}>
                     <p><strong>Question:</strong> {question}</p>
