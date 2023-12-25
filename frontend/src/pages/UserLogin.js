@@ -41,7 +41,7 @@ const UserLogin = () => {
                 setError(errorData.message);
               } else {
                 console.log('Login successful');
-                window.location.href = `/Content/${dataToSend.email}`;
+                window.location.href = `/DailyQuestion/${dataToSend.email}`;
               }
         } catch (error) {
             alert(error.message)
