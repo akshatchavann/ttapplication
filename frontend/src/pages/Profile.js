@@ -170,7 +170,7 @@ const Profile = () => {
       if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
           return { marginTop: '500px' };
       } else {
-          return { marginTop: '1200px' };
+          return { marginTop: '1000px' };
       }
     };
   
