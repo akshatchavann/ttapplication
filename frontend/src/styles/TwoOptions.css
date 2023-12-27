@@ -56,10 +56,28 @@
     font-size: 20px;
     cursor: pointer;
     width: 150px;
-    height: 65px;
+    height: 95px;
   }
   
   .home_signup_button:hover {
+    background-color: #789016;
+  }
+
+  .home_signup_button1 {
+    background-color: #caee2e;
+    color: rgb(0, 0, 0);
+    padding: 15px 40px;
+    border: none;
+    border-radius: 4px;
+    margin: 10px 0;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    width: 150px;
+    height: 75px;
+  }
+  
+  .home_signup_button1:hover {
     background-color: #789016;
   }
   
