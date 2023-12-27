@@ -10,6 +10,9 @@ import { useState, useEffect } from 'react';
 const AdminHome = () => {
     return (
         <div className="main">
+        <Link to={`/AdminDailyQuestion`}>
+            <button>Create Daily Questions</button>
+        </Link>
         <Link to={`/Admin`}>
             <button>Create Questions</button>
         </Link>
