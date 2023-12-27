@@ -90,7 +90,7 @@
 
 
 .learn {
-  color: D1F828;
+  color: #D1F828;
 }
 .question-text {
   font-weight: bold;
@@ -116,4 +116,7 @@
   text-align: left; /* Aligns text to the left */
 }
 
-
+.question-creator{
+  text-align: right; /* Aligns text to the left */
+  width: 95%; /* Optional: set the width of the div */
+}

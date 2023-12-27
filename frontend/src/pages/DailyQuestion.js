@@ -38,14 +38,6 @@ const DailyQuestion = () => {
         return questionsArray.filter(question => question.display === true);
     };  
 
-    const getFormStyle = () => {
-        // Check if loadedQuestion is defined and has active links
-        const hasActiveLinks =   // Check if loadedQuestion[0] is defined
-            (loadedQuestion && loadedQuestion && loadedQuestion.tweetboolean);
-        
-        // Return the style object based on the condition
-        return { paddingTop: hasActiveLinks ? '200px' : '0px', height: '100px' };
-    };
 
     console.log(loadedQuestion)
 
@@ -54,8 +46,6 @@ const DailyQuestion = () => {
         <div>
             <Header />
             <div className="dq-title">Question of the Day</div>
-
-            <div style={getFormStyle()}></div>
 
             
             {loadedQuestion && (

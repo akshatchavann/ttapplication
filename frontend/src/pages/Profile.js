@@ -40,6 +40,7 @@ const Profile = () => {
           if (!questionsResponse.ok) {
             throw new Error(questionsData.message);
           }
+          setQuestionsResponseData(questionsData.questions);
     
           // Fetch daily questions data
           const dailyQuestionsResponse = await fetch(`https://ttapplication-backend.vercel.app/api/dailyquestions`);
