@@ -21,34 +21,46 @@ const Profile = () => {
 
     
     useEffect(() => {
-        const sendRequest = async () => {
-          try {
-            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`); 
+      const sendRequest = async () => {
+        try {
+          // Fetch user profile data
+          const userProfileResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+          const userProfileData = await userProfileResponse.json();
     
-            const responseData = await response.json();
+          if (!userProfileResponse.ok) {
+            throw new Error(userProfileData.message);
+          }
     
-            if (!response.ok) {
-              throw new Error(responseData.message);
-            }
+          setProfileInformation(userProfileData.user);
     
-            setProfileInformation(responseData.user);
-
-
           // Fetch questions data
           const questionsResponse = await fetch(`https://ttapplication-backend.vercel.app/api/questions`);
-          const questionsResponseData = await questionsResponse.json();
-
+          const questionsData = await questionsResponse.json();
+    
           if (!questionsResponse.ok) {
-            throw new Error(questionsResponseData.message);
+            throw new Error(questionsData.message);
           }
-
-          setQuestionsResponseData(questionsResponseData.questions);
-          } catch (error) {
-            setError(error.message);
+    
+          // Fetch daily questions data
+          const dailyQuestionsResponse = await fetch(`https://ttapplication-backend.vercel.app/api/dailyquestions`);
+          const dailyQuestionsData = await dailyQuestionsResponse.json();
+    
+          if (!dailyQuestionsResponse.ok) {
+            throw new Error(dailyQuestionsData.message);
           }
-        };
-        sendRequest();
-      }, []);
+    
+          // Combine questions and daily questions
+          const combinedQuestions = [...questionsData.questions, ...dailyQuestionsData.questions];
+    
+          setQuestionsResponseData(combinedQuestions);
+    
+        } catch (error) {
+          setError(error.message);
+        }
+      };
+      sendRequest();
+    }, []); // Added email to the dependency array
+    
 
 
     const calculateAverageAnswer = (questionText) => {
