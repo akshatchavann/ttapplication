@@ -17,7 +17,7 @@ const DailyQuestion = () => {
         const fetchQuestionsAndUserIndex = async () => {
             try {
                 // Fetch questions
-                const questionsResponse = await fetch('https://ttapplication-backend.vercel.app/api/questions');
+                const questionsResponse = await fetch('https://ttapplication-backend.vercel.app/api/dailyquestions');
                 const questionsData = await questionsResponse.json();
                 if (!questionsResponse.ok) {
                     throw new Error(questionsData.message);
