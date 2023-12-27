@@ -6,5 +6,6 @@ const { model } = require('mongoose');
 const router = express.Router();
 
 router.get('/', dailyquestionsControllers.getQuestions);
+router.get('/create', dailyquestionsControllers.createQuestion);
 
 module.exports = router;
