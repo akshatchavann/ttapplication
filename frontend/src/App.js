@@ -16,6 +16,7 @@ import AdminHome from './pages/AdminHome.js';
 import UserContent from './pages/UserContent.js';
 import DailyQuestion from './pages/DailyQuestion.js';
 import TwoOptions from './pages/TwoOptions.js';
+import AdminDailyQuestion from './pages/AdminDailyQuestion.js';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/UserContent/:email" element={<UserContent />} />
           <Route path="/DailyQuestion/:email" element={<DailyQuestion />} />
           <Route path="/TwoOptions/:email" element={<TwoOptions />} />
+          <Route path="/AdminDailyQuestion" element={<AdminDailyQuestion />} />
 
         </Routes>
       </BrowserRouter>
