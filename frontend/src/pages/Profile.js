@@ -182,9 +182,11 @@ const Profile = () => {
     const getProfileStyle = () => {
       if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
           return { marginTop: '500px' };
-      } else {
+      } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
           return { marginTop: '1000px' };
-      }
+      } else
+          return { marginTop: '1500px' };
+
     };
   
   

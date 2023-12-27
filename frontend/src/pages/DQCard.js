@@ -62,7 +62,6 @@ const DQCard = (props) => {
             
             } else {
                 console.log('Opinion captured! Click Profile to see how your views compared to other users');
-                window.location.href = `/TwoOptions/${email}`;
 
             }
         } catch (error) {
@@ -86,6 +85,7 @@ const DQCard = (props) => {
                 setError(errorData.message);
             } else {
                 console.log('Question ratings submitted successfully');
+                window.location.href = `/TwoOptions/${email}`;
             }
 
         } catch (error) {
