@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.get('/', dailyquestionsControllers.getQuestions);
 router.post('/create', dailyquestionsControllers.createQuestion);
+router.put('/update', dailyquestionsControllers.updateQuestionbyID);
 
 module.exports = router;

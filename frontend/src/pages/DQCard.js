@@ -71,7 +71,7 @@ const DQCard = (props) => {
 
         try { 
             // Second PUT request to update question ratings
-            const questionResponse = await fetch(`https://ttapplication-backend.vercel.app/api/questions/update`, {
+            const questionResponse = await fetch(`https://ttapplication-backend.vercel.app/api/dailyquestions/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
