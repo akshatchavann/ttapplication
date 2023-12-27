@@ -25,9 +25,8 @@ const Content = () => {
                     throw new Error(questionsData.message);
                 }
                 const cleanData = cleanQuestionData(questionsData.questions)
-                const allButLast = cleanData.slice(0, cleanData.length - 1);
 
-                setLoadedQuestion(allButLast);
+                setLoadedQuestion(cleanData);
     
     
                 // Fetch user's question index
