@@ -19,6 +19,7 @@ const Header = () => {
               </Link>
           </div>
       </div>
+      <div className="right-container">
       <div className="button-container">
                 <Link className="nav-link" to={`/DailyQuestion/${email}`}>
                     <button type="button" className="home-button">
@@ -26,7 +27,6 @@ const Header = () => {
                     </button>
                 </Link>
             </div>
-      <div className="right-container">
           <div className="button-container">
               <Link className="nav-link" to={`/Content/${email}`}>
                   <button type="button" className="home-button">
@@ -36,7 +36,7 @@ const Header = () => {
           </div>
           <div className="button-container">
               <Link className="nav-link" to={`/Profile/${email}`}>
-                  <button type="button" className="home-button">
+                  <button type="button" className="home-button-yo">
                       Profile
                   </button>
               </Link>

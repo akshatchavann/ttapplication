@@ -25,6 +25,7 @@
     color: black;
 }
 
+
 .nav-link {
     text-decoration: none;
 }
@@ -36,4 +37,14 @@
     color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 10px;
+}
+
+.home-button-yo {
+    padding: 5px 10px;
+    border: none;
+    background-color: #D1F828;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 10px;
+    height: 35px;
 }
