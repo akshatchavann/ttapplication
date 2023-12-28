@@ -194,7 +194,6 @@ const Profile = () => {
       <div>
         <Header />
         <div className="profile" style={getProfileStyle()}>
-          <h2>Profile Information</h2>
           <div className="profile-details">
             <div>
               <h2>Opinion Comparison</h2>

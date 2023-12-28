@@ -3,7 +3,8 @@
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 20px;
+    text-align: center;
 }
 .yoo {
     display: flex;
@@ -57,7 +58,7 @@
     font-size: 20px;
     cursor: pointer;
     width: 150px;
-    height: 100px;
+    height: 105px;
   }
   
   .home_signup_button:hover {
@@ -75,7 +76,7 @@
     font-size: 20px;
     cursor: pointer;
     width: 150px;
-    height: 75px;
+    height: 80px;
   }
   
   .home_signup_button1:hover {
