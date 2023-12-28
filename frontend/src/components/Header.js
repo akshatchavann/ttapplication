@@ -24,14 +24,14 @@ const Header = () => {
           <div className="button-container">
               <Link className="nav-link" to={`/Content/${email}`}>
                   <button type="button" className="home-button">
-                      Home
+                    More Topics
                   </button>
               </Link>
           </div>
           <div className="button-container">
                 <Link className="nav-link" to={`/DailyQuestion/${email}`}>
                     <button type="button" className="home-button">
-                        Daily Question
+                            Question of the Day
                     </button>
                 </Link>
             </div>

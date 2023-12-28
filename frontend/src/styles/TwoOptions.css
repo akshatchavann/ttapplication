@@ -11,6 +11,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 15px;
+    text-align: center;
 }
 /* Home.css */
 .homecontainter {
@@ -56,7 +57,7 @@
     font-size: 20px;
     cursor: pointer;
     width: 150px;
-    height: 95px;
+    height: 100px;
   }
   
   .home_signup_button:hover {

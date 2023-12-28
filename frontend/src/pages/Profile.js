@@ -148,7 +148,7 @@ const Profile = () => {
       return {
         labels: labels,
         datasets: [{
-          label: 'Answer Count',
+          label: '# of Responses',
           data: data,
           backgroundColor: backgroundColors,
           borderColor: 'rgba(0, 0, 255, 1)',
@@ -181,11 +181,11 @@ const Profile = () => {
     
     const getProfileStyle = () => {
       if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
-          return { marginTop: '500px' };
+          return { marginTop: '300px' };
       } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
-          return { marginTop: '1000px' };
+          return { marginTop: '800px' };
       } else
-          return { marginTop: '1500px' };
+          return { marginTop: '1200px' };
 
     };
   
@@ -196,12 +196,8 @@ const Profile = () => {
         <div className="profile" style={getProfileStyle()}>
           <h2>Profile Information</h2>
           <div className="profile-details">
-            <div><strong>First Name:</strong> {ProfileInformation && ProfileInformation.firstname}</div>
-            <div><strong>Last Name:</strong> {ProfileInformation && ProfileInformation.lastname}</div>
-            <div><strong>Email:</strong> {ProfileInformation && ProfileInformation.email}</div>
-            <div><strong>Phone Number:</strong> {ProfileInformation && ProfileInformation.phoneNumber}</div>
             <div>
-              <h2>Questions and Answers</h2>
+              <h2>Opinion Comparison</h2>
               {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => {
                 const adjList = calculateAdjListofAnswers(question); // this is an object
                 const adjarray = renderAdjacencyList(adjList);// this is an array
