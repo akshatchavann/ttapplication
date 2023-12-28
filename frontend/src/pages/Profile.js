@@ -126,8 +126,8 @@ const Profile = () => {
     };
     
 
-    const generateChartData = (adjArray, highlightAnswer) => {
-      if (!adjArray) {
+    const generateChartData = (adjArray, highlightAnswer, allChoices) => {
+      if (!allChoices || allChoices.length === 0) {
         return {
           labels: [],
           datasets: [{
@@ -140,10 +140,16 @@ const Profile = () => {
         };
       }
     
-      // Extract labels and data from the array
-      const labels = adjArray.map(item => item.answer);
-      const data = adjArray.map(item => item.count);
-      const backgroundColors = adjArray.map(item => item.answer === highlightAnswer ? 'rgba(255, 255, 0, 0.5)' : 'rgba(0, 0, 255, 0.5)');
+      // Create a map of answer to count
+      const countMap = adjArray.reduce((acc, item) => {
+        acc[item.answer] = item.count;
+        return acc;
+      }, {});
+    
+      // Use allChoices to ensure all options are included
+      const labels = allChoices;
+      const data = allChoices.map(choice => countMap[choice] || 0);
+      const backgroundColors = allChoices.map(choice => choice === highlightAnswer ? 'rgba(255, 255, 0, 0.5)' : 'rgba(0, 0, 255, 0.5)');
     
       return {
         labels: labels,
@@ -156,6 +162,7 @@ const Profile = () => {
         }],
       };
     };
+    
 
     const findLabels = (questionText) => {
       // Initialize default labels
@@ -200,6 +207,7 @@ const Profile = () => {
               {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => {
                 const adjList = calculateAdjListofAnswers(question); // this is an object
                 const adjarray = renderAdjacencyList(adjList);// this is an array
+                const allAnswerChoices = [-3,-2,-1,0,1,2,3]
                 const { leftLabel, midLabel, rightLabel } = findLabels(question);
                 return (
                   <div key={index}>
@@ -209,7 +217,9 @@ const Profile = () => {
                     {ProfileInformation.answers && ProfileInformation.answers[index] !== 4 && (
                         <>
                           <div className="chart-container">
-                            <Bar data={generateChartData(adjarray, String(ProfileInformation.answers[index]))} />
+
+                          <Bar data={generateChartData(adjarray, String(ProfileInformation.answers[index]), allAnswerChoices)} />
+
                           </div>
                           <div className="label-container">
                             <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
