@@ -181,9 +181,9 @@ const Profile = () => {
     
     const getProfileStyle = () => {
       if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
-          return { marginTop: '300px' };
+          return { marginTop: '200px' };
       } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
-          return { marginTop: '800px' };
+          return { marginTop: '500px' };
       } else
           return { marginTop: '1000px' };
 
