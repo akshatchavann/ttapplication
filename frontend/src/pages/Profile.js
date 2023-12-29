@@ -192,7 +192,7 @@ const Profile = () => {
       } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
           return { marginTop: '500px' };
       } else
-          return { marginTop: '1300px' };
+          return { marginTop: '1500px' };
 
     };
   
