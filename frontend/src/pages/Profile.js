@@ -125,7 +125,6 @@ const Profile = () => {
         .sort((a, b) => parseFloat(a.answer) - parseFloat(b.answer));
     };
     
-
     const generateChartData = (adjArray, highlightAnswer, allChoices) => {
       if (!allChoices || allChoices.length === 0) {
         return {
@@ -142,14 +141,16 @@ const Profile = () => {
     
       // Create a map of answer to count
       const countMap = adjArray.reduce((acc, item) => {
-        acc[item.answer] = item.count;
+        acc[String(item.answer)] = item.count; // Ensure the keys are strings
         return acc;
       }, {});
     
       // Use allChoices to ensure all options are included
-      const labels = allChoices;
-      const data = allChoices.map(choice => countMap[choice] || 0);
-      const backgroundColors = allChoices.map(choice => choice === highlightAnswer ? 'rgba(255, 255, 0, 0.5)' : 'rgba(0, 0, 255, 0.5)');
+      const labels = allChoices.map(String); // Convert all choices to strings
+      const data = labels.map(label => countMap[label] || 0);
+      const backgroundColors = labels.map(label => 
+        label === String(highlightAnswer) ? 'rgba(255, 255, 0, 0.5)' : 'rgba(0, 0, 255, 0.5)'
+      );
     
       return {
         labels: labels,
@@ -162,6 +163,7 @@ const Profile = () => {
         }],
       };
     };
+    
     
 
     const findLabels = (questionText) => {
