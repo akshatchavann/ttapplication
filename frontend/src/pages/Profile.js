@@ -193,6 +193,8 @@ const Profile = () => {
           return { marginTop: '200px' };
       } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
           return { marginTop: '500px' };
+      } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 6) {
+        return { marginTop: '800px' };
       } else
           return { marginTop: '1500px' };
 
@@ -224,7 +226,7 @@ const Profile = () => {
 
                           </div>
                           <div className="label-container">
-                            <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
+                            <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
                           </div>
                         </>
                       )}
