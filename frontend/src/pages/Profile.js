@@ -155,7 +155,7 @@ const Profile = () => {
       return {
         labels: labels,
         datasets: [{
-          label: '# of Responses',
+          label: '= # of Responses',
           data: data,
           backgroundColor: backgroundColors,
           borderColor: 'rgba(0, 0, 255, 1)',
