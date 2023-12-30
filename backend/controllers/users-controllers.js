@@ -197,6 +197,22 @@ const fullUserUpdate = async (req, res) => {
     }
 };
 
+const getUserIdByEmail = async (req, res, next) => {
+  const email = req.params.email;
+
+  try {
+      const user = await User.findOne({ email: email });
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.json({ userId: user.id }); // Or user._id depending on your schema
+  } catch (err) {
+      const error = new HttpError('Fetching user failed, please try again later.', 500);
+      return next(error);
+  }
+};
   
   
 exports.fullUserUpdate = fullUserUpdate;
@@ -206,3 +222,4 @@ exports.login = login;
 exports.updateUserbyID = updateUserbyID;
 exports.getUserbyEmail = getUserbyEmail;  
 exports.increaseQuestionIndex = increaseQuestionIndex;
+exports.getUserIdByEmail = getUserIdByEmail;

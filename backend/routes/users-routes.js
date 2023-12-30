@@ -20,6 +20,8 @@ router.put('/increasequestion/:uemail', usersControllers.increaseQuestionIndex);
 
 router.put('/fullupdate/:uemail', usersControllers.fullUserUpdate);
 
+router.get('/getUserId/:email', usersControllers.getUserIdByEmail);
+
 
 
 module.exports = router;
