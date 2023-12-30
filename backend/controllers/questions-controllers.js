@@ -36,10 +36,10 @@ const createQuestion = async (req, res, next) => {
 };
 
 const updateQuestionbyID = async (req, res, next) => {
-    const { id, userId, answer } = req.body; // Assuming you pass the user ID and their answer
+    const { questionid, userId, answer } = req.body; // Assuming you pass the user ID and their answer
 
     try {
-        const question = await Question.findOne({ _id: id });
+        const question = await Question.findOne({ _id: questionid });
 
         if (!question) {
             return res.status(404).json({ message: 'Question not found' });
