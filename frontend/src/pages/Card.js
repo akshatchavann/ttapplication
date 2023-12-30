@@ -9,20 +9,43 @@ import "../styles/Card.css";
 
 
 const Card = (props) => {
+    const { email } = useParams();
+    const [userId, setUserId] = useState(null);
+
+    const [error, setError] = useState(null);
+
+    const fetchUserId = async () => {
+        try {
+            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/getUserId/${email}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user ID');
+            }
+            const data = await response.json();
+            console.log(data.userId)
+            setUserId(data.userId);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (email) {
+            fetchUserId();
+        }
+    }, [email]);
+
+
     const [ratings, setRatings] = useState(() => {
         if (props.info && props.info.length > 0) {
             return {
-                id: props.info[0]._id, // Assuming '_id' is the field for the question ID
+                questionid: props.info[0]._id, // Assuming '_id' is the field for the question ID
                 qs: props.info[0].question, // Assuming 'question' is the field for the question text
-                ans: 0 // Initialize answer as 0
+                answer: 0,
+                userId: userId , // Initialize answer as 0
             };
         }
         return {};
     });
-
-    const [error, setError] = useState(null);
-    const { email } = useParams();
-
 
     useEffect(() => {
         const sendRequest = async () => {
@@ -97,12 +120,14 @@ const Card = (props) => {
     const handleRatingChange = (id, question, value) => {
         setRatings(prevRatings => {
             return {
-                id: id,
+                questionid: id,
                 qs: question,
-                ans: value
+                answer: value,
+                userId: userId,
             }
         });
     }
+
 
     const getFormStyle = () => {
         // Check if loadedQuestion is defined and has active links
@@ -141,6 +166,7 @@ const Card = (props) => {
         }
     }
     
+    console.log(ratings);
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (
