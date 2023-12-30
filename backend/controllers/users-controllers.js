@@ -214,6 +214,25 @@ const getUserIdByEmail = async (req, res, next) => {
   }
 };
   
+
+const getUserEmailById = async (req, res, next) => {
+  const userId = req.params.id;
+
+  try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.json({ email: user.email });
+  } catch (err) {
+      const error = new HttpError('Fetching user failed, please try again later.', 500);
+      return next(error);
+  }
+};
+
+
   
 exports.fullUserUpdate = fullUserUpdate;
 exports.getUsers = getUsers;
@@ -223,3 +242,4 @@ exports.updateUserbyID = updateUserbyID;
 exports.getUserbyEmail = getUserbyEmail;  
 exports.increaseQuestionIndex = increaseQuestionIndex;
 exports.getUserIdByEmail = getUserIdByEmail;
+exports.getUserEmailById = getUserEmailById;

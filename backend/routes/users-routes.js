@@ -23,5 +23,8 @@ router.put('/fullupdate/:uemail', usersControllers.fullUserUpdate);
 router.get('/getUserId/:email', usersControllers.getUserIdByEmail);
 
 
+router.get('/getUserEmail/:id', usersControllers.getUserEmailById);
+
+
 
 module.exports = router;
