@@ -96,11 +96,12 @@ const login = async (req, res, next) => {
 };
 
 const increaseQuestionIndex = async (req, res, next) => {
-  const userEmail = req.params.uemail;
+  const userId = req.params.uid; // Use 'uid' instead of 'uemail'
+
   try {
-      // Find the user by email and increment the questionindex by 1
-      const updatedUser = await User.findOneAndUpdate(
-          { email: userEmail }, // Filter by email
+      // Find the user by ID and increment the questionindex by 1
+      const updatedUser = await User.findByIdAndUpdate(
+          userId, // Filter by user ID
           { $inc: { questionindex: 1 } }, // Increment operation
           { new: true } // Option to return the updated document
       );
@@ -123,13 +124,14 @@ const increaseQuestionIndex = async (req, res, next) => {
 
 
 
+
 const updateUserbyID = async (req, res, next) => {
-  const uemail = req.params.uemail;
+  const userId = req.params.uid; // Get the user ID from the request parameters
   const { qs, ans } = req.body;
 
   try {
-    // Find the user by email or some unique identifier
-    const user = await User.findOne({ email: uemail });
+    // Find the user by ID
+    const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -159,6 +161,7 @@ const updateUserbyID = async (req, res, next) => {
 
 
 
+
 const getUserbyEmail = async (req, res, next) => {
     const email = req.params.uemail;
 
@@ -179,23 +182,28 @@ const getUserbyEmail = async (req, res, next) => {
 
 
 const fullUserUpdate = async (req, res) => {
-    const userEmail = req.params.uemail; // Retrieve the email from the URL parameter
-    const updatedData = req.body;
+  const userId = req.params.uid; // Retrieve the user ID from the URL parameter
+  const updatedData = req.body;
 
-    try {
-        // Find the user by email and update
-        const updatedUser = await User.findOneAndUpdate({ email: userEmail }, updatedData, { new: true });
+  try {
+      // Find the user by ID and update
+      const updatedUser = await User.findByIdAndUpdate(
+          userId, // Use the user ID for finding the user
+          updatedData, 
+          { new: true } // Return the updated document
+      );
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+      if (!updatedUser) {
+          return res.status(404).json({ message: 'User not found' });
+      }
 
-        res.status(200).json(updatedUser);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error updating user' });
-    }
+      res.status(200).json(updatedUser);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error updating user' });
+  }
 };
+
 
 const getUserIdByEmail = async (req, res, next) => {
   const email = req.params.email;

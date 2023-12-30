@@ -12,18 +12,18 @@ router.post('/signup', usersControllers.signup);
 
 router.post('/login', usersControllers.login);
 
-router.put('/update/:uemail', usersControllers.updateUserbyID);
+router.put('/update/:uid', usersControllers.updateUserbyID);
 
-router.get('/:uemail', usersControllers.getUserbyEmail);
 
-router.put('/increasequestion/:uemail', usersControllers.increaseQuestionIndex);
+router.put('/increasequestion/:uid', usersControllers.increaseQuestionIndex);
 
-router.put('/fullupdate/:uemail', usersControllers.fullUserUpdate);
+router.put('/fullupdate/:uid', usersControllers.fullUserUpdate);
+
+router.get('/getUserEmail/:id', usersControllers.getUserEmailById);
 
 router.get('/getUserId/:email', usersControllers.getUserIdByEmail);
 
-
-router.get('/getUserEmail/:id', usersControllers.getUserEmailById);
+router.get('/:uemail', usersControllers.getUserbyEmail);
 
 
 
