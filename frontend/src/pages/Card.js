@@ -143,7 +143,7 @@ const Card = (props) => {
     
         try {
             // Update the ratings object with a hardcoded value for 'ans' when skipped
-            const updatedRatings = { ...ratings, ans: 4 };
+            const updatedRatings = { ...ratings, answer: 4 };
     
             // PUT request to update user ratings
             const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
@@ -220,7 +220,7 @@ const Card = (props) => {
                             max="3"
                             name={`rating-${question.question}`}
                             onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
-                            value={ratings.ans || '0'}
+                            value={ratings.answer || '0'}
                         />
                         <div className="slider-labels">
                             <span> {question.left} </span>
@@ -247,7 +247,7 @@ const Card = (props) => {
 
                         </div>
                         <div className="currans">
-                            Current Answer: {ratings.ans || '0'}
+                            Current Answer: {ratings.answer || '0'}
                         </div>
 
                     </div>
