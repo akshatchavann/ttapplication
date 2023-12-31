@@ -127,34 +127,30 @@ const increaseQuestionIndex = async (req, res, next) => {
 
 
 const updateUserbyID = async (req, res, next) => {
-  const userId = req.params.uid; // Get the user ID from the request parameters
-  const { questionId, answer } = req.body; // Assuming you pass questionId and answer
+  const userId = req.params.uid;
+  const { questionId, answer } = req.body;
 
   try {
-      // Find the user by ID
-      const user = await User.findById(userId);
+      if (!mongoose.Types.ObjectId.isValid(questionId)) {
+          return res.status(400).json({ message: 'Invalid questionId' });
+      }
 
+      const user = await User.findById(userId);
       if (!user) {
           return res.status(404).json({ message: 'User not found' });
       }
 
-      // Check if the question already exists in the user's QnA array
       const qnaIndex = user.QnA.findIndex((qna) => qna.questionId.toString() === questionId);
 
       if (qnaIndex !== -1) {
-          // If the question exists, update its corresponding answer
           user.QnA[qnaIndex].answer = answer;
       } else {
-          // If the question doesn't exist, add it to the user's QnA array
-          user.QnA.push({ questionId: mongoose.Types.ObjectId(questionId), answer });
+          user.QnA.push({ questionId: new mongoose.Types.ObjectId(questionId), answer });
       }
 
-      // Save the updated user data
       await user.save();
-
       res.json({ message: 'User QnA updated successfully', user: user });
   } catch (error) {
-      // Handle any errors that may occur during the process
       next(error);
   }
 };
