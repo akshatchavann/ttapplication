@@ -36,10 +36,10 @@ const createQuestion = async (req, res, next) => {
 
 
 const updateQuestionbyID = async (req, res, next) => {
-    const { questionid, userId, answer } = req.body; // Assuming you pass the user ID and their answer
+    const { questionId, userId, answer } = req.body; // Assuming you pass the user ID and their answer
 
     try {
-        const question = await dailyquestionSchema.findOne({ _id: questionid });
+        const question = await dailyquestionSchema.findOne({ _id: questionId });
 
         if (!question) {
             return res.status(404).json({ message: 'Question not found' });
