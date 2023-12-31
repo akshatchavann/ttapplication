@@ -14,7 +14,6 @@ router.post('/login', usersControllers.login);
 
 router.put('/update/:uid', usersControllers.updateUserbyID);
 
-
 router.put('/increasequestion/:uid', usersControllers.increaseQuestionIndex);
 
 router.put('/fullupdate/:uid', usersControllers.fullUserUpdate);

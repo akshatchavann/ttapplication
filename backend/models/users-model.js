@@ -11,7 +11,7 @@ const userSchema = new Schema({
     questions: { type: Array, required: false },
     answers: { type: Array, required: false },
     QnA: [{
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        questionId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
         answer: { type: String, required: true }
     }],
     questionindex: { type: Number, required: false },
