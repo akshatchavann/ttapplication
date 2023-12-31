@@ -36,29 +36,32 @@ const createQuestion = async (req, res, next) => {
 
 
 const updateQuestionbyID = async (req, res, next) => {
-    const { id, ans } = req.body; // id is not in body for this
-  
+    const { questionid, userId, answer } = req.body; // Assuming you pass the user ID and their answer
+
     try {
-      // Find the question by qid in the questions collection
-      const question = await dailyquestionSchema.findOne({ _id: id });
-  
-      if (!question) {
-        return res.status(404).json({ message: 'Question not found' });
-      }
-  
-      // Now you have the specific question object
-      // Update the question object with the answer
-      question.answers.push(ans);
-  
-      // Save the updated question object
-      await question.save();
-  
-      res.json({ message: 'Answer added to the question', question });
+        const question = await dailyquestionSchema.findOne({ _id: questionid });
+
+        if (!question) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+
+        // Check if the user has already answered
+        const existingAnswerIndex = question.answers.findIndex(a => a.userId.equals(userId));
+
+        if (existingAnswerIndex !== -1) {
+            // User has already answered, update their answer
+            question.answers[existingAnswerIndex].answer = answer;
+        } else {
+            // User has not answered yet, add a new answer
+            question.answers.push({ userId, answer });
+        }
+
+        await question.save();
+        res.json({ message: 'Answer updated successfully', question });
     } catch (error) {
-      // Handle any errors that may occur during the process
-      next(error);
+        next(error);
     }
-  };
+};
 
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;

@@ -5,7 +5,10 @@ const dailyquestionSchema = new Schema({
     question: { type: String, required: true },
     bio: { type: String, required: true },
     category: { type: Array, required: true },
-    answers: { type: Array, required: true },
+    answers: [{
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        answer: { type: String, required: true }
+    }],
     tweetboolean: { type: Boolean, required: true },
     tweetURL: { type: String, required: false },
     contentboolean: { type: Boolean, required: true },
