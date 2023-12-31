@@ -127,37 +127,37 @@ const increaseQuestionIndex = async (req, res, next) => {
 
 const updateUserbyID = async (req, res, next) => {
   const userId = req.params.uid; // Get the user ID from the request parameters
-  const { qs, ans } = req.body;
+  const { questionId, answer } = req.body; // Assuming you pass questionId and answer
 
   try {
-    // Find the user by ID
-    const user = await User.findById(userId);
+      // Find the user by ID
+      const user = await User.findById(userId);
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
 
-    // Check if the question already exists in the user's questions array
-    const questionIndex = user.questions.findIndex((question) => question === qs);
+      // Check if the question already exists in the user's QnA array
+      const qnaIndex = user.QnA.findIndex((qna) => qna.questionId.toString() === questionId);
 
-    if (questionIndex !== -1) {
-      // If the question exists, update its corresponding answer
-      user.answers[questionIndex] = ans;
-    } else {
-      // If the question doesn't exist, add it to the user's questions and answers arrays
-      user.questions.push(qs);
-      user.answers.push(ans);
-    }
+      if (qnaIndex !== -1) {
+          // If the question exists, update its corresponding answer
+          user.QnA[qnaIndex].answer = answer;
+      } else {
+          // If the question doesn't exist, add it to the user's QnA array
+          user.QnA.push({ questionId: mongoose.Types.ObjectId(questionId), answer });
+      }
 
-    // Save the updated user data
-    await user.save();
+      // Save the updated user data
+      await user.save();
 
-    res.json({ message: 'User QnA updated successfully', user: user });
+      res.json({ message: 'User QnA updated successfully', user: user });
   } catch (error) {
-    // Handle any errors that may occur during the process
-    next(error);
+      // Handle any errors that may occur during the process
+      next(error);
   }
 };
+
 
 
 
