@@ -22,9 +22,9 @@ router.get('/getUserEmail/:id', usersControllers.getUserEmailById);
 
 router.get('/getUserId/:email', usersControllers.getUserIdByEmail);
 
-router.get('/:uemail', usersControllers.getUserbyEmail);
+router.get('/email/:uemail', usersControllers.getUserbyEmail);
 
-router.get('/:uid', usersControllers.getUserByID);
+router.get('/id/:uid', usersControllers.getUserByID);
 
 
 
