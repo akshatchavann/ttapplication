@@ -9,9 +9,12 @@ import DQCard from './DQCard';
 import CompletedPage from "./CompletedPage";
 
 const DailyQuestion = () => {
-    const { email } = useParams();
+    const { id } = useParams();
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
+    const [email, setEmail] = useState('');
+
+
 
     useEffect(() => {
         const fetchQuestionsAndUserIndex = async () => {
@@ -23,7 +26,6 @@ const DailyQuestion = () => {
                     throw new Error(questionsData.message);
                 }
                 const cleanData = cleanQuestionData(questionsData.questions)
-    
                 setLoadedQuestion(cleanData[cleanData.length - 1]);
     
             } catch (error) {
@@ -39,8 +41,6 @@ const DailyQuestion = () => {
     };  
 
 
-    console.log(loadedQuestion)
-
     return (
 
         <div>
@@ -49,7 +49,7 @@ const DailyQuestion = () => {
 
             
             {loadedQuestion && (
-                <DQCard key={0} info={[loadedQuestion]} />
+                <DQCard key={0} info={[loadedQuestion]}/>
             )}
         </div>
     

@@ -9,39 +9,15 @@ import "../styles/Card.css";
 
 
 const Card = (props) => {
-    const { email } = useParams();
-    const [userId, setUserId] = useState(null);
-
+    const { id } = useParams();
     const [error, setError] = useState(null);
-
-    const fetchUserId = async () => {
-        try {
-            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/getUserId/${email}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch user ID');
-            }
-            const data = await response.json();
-            console.log(data.userId)
-            setUserId(data.userId);
-        } catch (error) {
-            setError(error.message);
-        }
-    };
-
-    useEffect(() => {
-        if (email) {
-            fetchUserId();
-        }
-    }, [email]);
-
-
     const [ratings, setRatings] = useState(() => {
         if (props.info && props.info.length > 0) {
             return {
-                questionid: props.info[0]._id, // Assuming '_id' is the field for the question ID
+                questionId: props.info[0]._id, // Assuming '_id' is the field for the question ID
                 qs: props.info[0].question, // Assuming 'question' is the field for the question text
                 answer: 0,
-                userId: userId , // Initialize answer as 0
+                userId: id , // Initialize answer as 0
             };
         }
         return {};
@@ -68,7 +44,7 @@ const Card = (props) => {
     
         try {
             // First PUT request to update user ratings
-            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -117,13 +93,13 @@ const Card = (props) => {
     }
 
 
-    const handleRatingChange = (id, question, value) => {
+    const handleRatingChange = (qid, question, value) => {
         setRatings(prevRatings => {
             return {
-                questionid: id,
+                questionId: qid,
                 qs: question,
                 answer: value,
-                userId: userId,
+                userId: id,
             }
         });
     }
@@ -146,7 +122,7 @@ const Card = (props) => {
             const updatedRatings = { ...ratings, answer: 4 };
     
             // PUT request to update user ratings
-            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,10 +154,11 @@ const Card = (props) => {
                         <blockquote className="twitter-tweet twitter-tweet-rendered">
                             <a href={question.tweetURL}></a>
                         </blockquote>
+                        <div className="titl"> Summary </div>
                         <div className="question-bio">{question.bio}</div>
 
                         <div style={{ height: '10px' }}></div>
-
+                        <div className="titl"> Question </div>
                         <div className="question-text">{question.question}</div> 
                         <div style={{ height: '10px' }}></div>
 

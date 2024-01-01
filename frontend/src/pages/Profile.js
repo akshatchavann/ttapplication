@@ -14,7 +14,7 @@ import Chart from 'chart.js/auto';
 
 const Profile = () => {
 
-    const { email } = useParams();
+    const { id } = useParams();
     const [ProfileInformation, setProfileInformation] = useState();
     const [questionsResponseData, setQuestionsResponseData] = useState([]);
     const [Error, setError] = useState(null);   
@@ -24,7 +24,7 @@ const Profile = () => {
       const sendRequest = async () => {
         try {
           // Fetch user profile data
-          const userProfileResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+          const userProfileResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/id/${id}`);
           const userProfileData = await userProfileResponse.json();
     
           if (!userProfileResponse.ok) {
@@ -49,7 +49,7 @@ const Profile = () => {
           if (!dailyQuestionsResponse.ok) {
             throw new Error(dailyQuestionsData.message);
           }
-    
+
           // Combine questions and daily questions
           const combinedQuestions = [...questionsData.questions, ...dailyQuestionsData.questions];
     
@@ -86,35 +86,34 @@ const Profile = () => {
       return 'N/A';
     };
 
-    const calculateAdjListofAnswers = (questionText) => {
-      // Find the question data using question text
-      const questionData = questionsResponseData.find((q) => q.question === questionText);
-    
-      if (questionData) {
-        // Convert all answers to numbers (handle both string and number types)
-        const validAnswers = questionData.answers.map((answer) => {
+    const calculateAdjListofAnswers = (questionObject) => {
+      // Assuming each questionObject contains an 'answers' array
+      const answersArray = questionObject.answers;
+  
+      // Create an adjacency list
+      const adjacencyList = {};
+  
+      // Count occurrences of each answer
+      answersArray.forEach((answerObj) => {
+          // Extract the answer, assuming each answerObj has an 'answer' property
+          const answer = answerObj.answer;
+          
+          // Convert answer to number if possible
           const number = parseFloat(answer);
-          return isNaN(number) ? answer : number;
-        });
-    
-        // Create an adjacency list
-        const adjacencyList = {};
-    
-        // Count occurrences of each answer
-        validAnswers.forEach((answer) => {
-          if (adjacencyList[answer] === undefined) {
-            adjacencyList[answer] = 1;
+          const validAnswer = isNaN(number) ? answer : number;
+  
+          // Update the count in the adjacency list
+          if (adjacencyList[validAnswer] === undefined) {
+              adjacencyList[validAnswer] = 1;
           } else {
-            adjacencyList[answer]++;
+              adjacencyList[validAnswer]++;
           }
-        });
-    
-        return adjacencyList;
-      }
-    
-      // If questionData is not found
-      return {};
-    };
+      });
+  
+      return adjacencyList;
+  };
+  
+  
     
     const renderAdjacencyList = (adjacencyList) => {
       return Object.entries(adjacencyList)
@@ -166,20 +165,18 @@ const Profile = () => {
     
     
 
-    const findLabels = (questionText) => {
+    const findLabels = (question) => {
       // Initialize default labels
       let leftLabel = '';
       let midLabel = '';
       let rightLabel = '';
     
-      // Find the question in the questionsResponseData
-      const questionData = questionsResponseData.find(q => q.question === questionText);
     
-      if (questionData) {
+      if (question) {
         // Assuming the labels are stored in a property of questionData, e.g., labels
-        leftLabel = questionData.left;
-        midLabel = questionData.mid;
-        rightLabel = questionData.right;
+        leftLabel = question.left;
+        midLabel = question.mid;
+        rightLabel = question.right;
       }
     
       // Return the labels
@@ -189,17 +186,15 @@ const Profile = () => {
     
     
     const getProfileStyle = () => {
-      if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 2) {
-          return { marginTop: '200px' };
-      } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 4) {
-          return { marginTop: '500px' };
-      } else if (ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.length < 6) {
-        return { marginTop: '800px' };
-      } else
-          return { marginTop: '1500px' };
+      const muilt = ((ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length) || 0) * 200;
+      
+        return { marginTop: muilt + 'px' };
 
     };
-  
+
+  const findQuestionById = (questionId, questions) => {
+      return questions.find(question => question._id === questionId);
+  };
   
     return (
       <div>
@@ -208,36 +203,43 @@ const Profile = () => {
           <div className="profile-details">
             <div>
               <h2>Opinion Comparison</h2>
-              {ProfileInformation && ProfileInformation.questions && ProfileInformation.questions.map((question, index) => {
-                const adjList = calculateAdjListofAnswers(question); // this is an object
-                const adjarray = renderAdjacencyList(adjList);// this is an array
-                const allAnswerChoices = [-3,-2,-1,0,1,2,3]
-                const { leftLabel, midLabel, rightLabel } = findLabels(question);
-                return (
-                  <div key={index}>
-                    <p><strong>Question:</strong> {question}</p>
-                    <p><strong>Your Answer:</strong> {ProfileInformation.answers && ProfileInformation.answers[index] === 4 ? 'Question Skipped' : ProfileInformation.answers[index] + " (Yellow Bar)"}</p>
 
-                    {ProfileInformation.answers && ProfileInformation.answers[index] !== 4 && (
-                        <>
-                          <div className="chart-container">
+              {
+                  ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.map((qna, index) => {
+                      const question = findQuestionById(qna.questionId, questionsResponseData); // Assuming questionResponseData is your array of questions
+                      if (!question) return null; // Skip if the question is not found
 
-                          <Bar data={generateChartData(adjarray, String(ProfileInformation.answers[index]), allAnswerChoices)} />
+                      // Assuming calculateAdjListofAnswers and other functions are defined and work with the question object
+                      const adjList = calculateAdjListofAnswers(question);
+                      const adjarray = renderAdjacencyList(adjList);
+                      const allAnswerChoices = [-3, -2, -1, 0, 1, 2, 3];
+                      const { leftLabel, midLabel, rightLabel } = findLabels(question);
 
-                          </div>
-                          <div className="label-container">
-                            <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
-                          </div>
-                        </>
-                      )}
+                      return (
+                          <div key={index}>
+                              <p><strong>Question:</strong> {question.question}</p>
+                              <p>
+                                  <strong>Your Answer:</strong> 
+                                  {qna.answer === "4" ? 'Skipped' : `${qna.answer} (Yellow Bar)`}
+                              </p>
 
+                              {qna.answer !== "4" && (
+                                  <>
+                                      <div className="chart-container">
+                                          <Bar data={generateChartData(adjarray, String(qna.answer), allAnswerChoices)} />
+                                      </div>
+                                      <div className="label-container">
+                                          <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
+                                      </div>
 
-                    <div style={{ height: '10px' }}></div>
-                    <>---------------------------------------------------</>
-                  </div>
-
-                );
-              })}
+                                      <div style={{ height: '10px' }}></div>
+                                      <>---------------------------------------------------</>
+                                  </>
+                              )}
+</div>
+                      );
+                  })
+              }
             </div> 
           </div>
         </div>

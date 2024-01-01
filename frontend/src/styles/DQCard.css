@@ -122,3 +122,11 @@
   width: 99%; /* Optional: set the width of the div */
   color: #D1F828
 }
+
+
+/* In your CSS file (e.g., styles.css) */
+.titl {
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}

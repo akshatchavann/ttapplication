@@ -9,21 +9,23 @@ import "../styles/DQCard.css";
 
 
 const DQCard = (props) => {
+    const { id } = useParams();
+    console.log(id)
     const [ratings, setRatings] = useState(() => {
         if (props.info && props.info.length > 0) {
             return {
-                id: props.info[0]._id, // Assuming '_id' is the field for the question ID
+                questionId: props.info[0]._id, // Assuming '_id' is the field for the question ID
                 qs: props.info[0].question, // Assuming 'question' is the field for the question text
-                ans: 0 // Initialize answer as 0
+                answer: 0,
+                userId: id
             };
         }
         return {};
     });
 
     const [error, setError] = useState(null);
-    const { email } = useParams();
 
-
+    //twitter
     useEffect(() => {
         const sendRequest = async () => {
           try {
@@ -42,10 +44,10 @@ const DQCard = (props) => {
 
     const handleSubmitRatings = async (e) => {
         e.preventDefault();
-    
+
         try {
             // First PUT request to update user ratings
-            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +56,6 @@ const DQCard = (props) => {
                     ratings, // Include the ratings object for users
                 ),
             });
-
     
             if (!userResponse.ok) {
                 const errorData = await userResponse.json();
@@ -85,7 +86,7 @@ const DQCard = (props) => {
                 setError(errorData.message);
             } else {
                 console.log('Question ratings submitted successfully');
-                window.location.href = `/TwoOptions/${email}`;
+                window.location.href = `/TwoOptions/${id}`;
             }
 
         } catch (error) {
@@ -94,12 +95,13 @@ const DQCard = (props) => {
     }
 
 
-    const handleRatingChange = (id, question, value) => {
+    const handleRatingChange = (qid, question, value) => {
         setRatings(prevRatings => {
             return {
-                id: id,
+                questionId: qid,
                 qs: question,
-                ans: value
+                answer: value,
+                userId: id
             }
         });
     }
@@ -118,10 +120,10 @@ const DQCard = (props) => {
     
         try {
             // Update the ratings object with a hardcoded value for 'ans' when skipped
-            const updatedRatings = { ...ratings, ans: 4 };
+            const updatedRatings = { ...ratings, answer: 4 };
     
             // PUT request to update user ratings
-            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${email}`, {
+            const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,7 +136,7 @@ const DQCard = (props) => {
                 setError(errorData.message);
             } else {
                 console.log('Opinion captured! Click Profile to see how your views compared to other users');
-                window.location.href = `/TwoOptions/${email}`;
+                window.location.href = `/TwoOptions/${id}`;
 
             }
         } catch (error) {
@@ -142,6 +144,8 @@ const DQCard = (props) => {
         }
     }
     
+    console.log(ratings);
+
     return (
         <div className="form">
         {props && props.info && props.info[0] ? (
@@ -153,10 +157,11 @@ const DQCard = (props) => {
                         <blockquote className="twitter-tweet twitter-tweet-rendered">
                             <a href={question.tweetURL}></a>
                         </blockquote>
+                        <div className="titl"> Summary </div>
                         <div className="question-bio">{question.bio}</div>
 
                         <div style={{ height: '10px' }}></div>
-
+                        <div className="titl"> Question </div>
                         <div className="question-text">{question.question}</div> 
                         <div style={{ height: '10px' }}></div>
 
@@ -195,7 +200,7 @@ const DQCard = (props) => {
                             max="3"
                             name={`rating-${question.question}`}
                             onChange={e => handleRatingChange(question._id, question.question, e.target.value)}
-                            value={ratings.ans || '0'}
+                            value={ratings.answer || '0'}
                         />
                         <div className="slider-labels">
                             <span> {question.left} </span>
@@ -222,7 +227,7 @@ const DQCard = (props) => {
 
                         </div>
                         <div className="currans">
-                            Current Answer: {ratings.ans || '0'}
+                            Current Answer: {ratings.answer || '0'}
                         </div>
 
                     </div>

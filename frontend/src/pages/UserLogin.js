@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/UserLogin.css";
+import { useEffect } from 'react';
 
 
 const UserLogin = () => {
     const [userdata, setuserdata] = useState({email:'',password:''})
+    const [userId, setUserId] = useState(null);
     const [error, setError] = useState(null);
 
     function handlechange(event) {
@@ -20,34 +22,46 @@ const UserLogin = () => {
     console.log(userdata)
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+    
         try {
-            e.preventDefault()
             const dataToSend = {
                 ...userdata,
                 email: userdata.email.toLowerCase(),
             };
-            console.log(userdata)
-            const response = await fetch('https://ttapplication-backend.vercel.app/api/users/login', {
+    
+            const loginResponse = await fetch('https://ttapplication-backend.vercel.app/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(dataToSend)
-            })
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                alert(errorData.message)
+            });
+    
+            if (!loginResponse.ok) {
+                const errorData = await loginResponse.json();
+                alert(errorData.message);
                 setError(errorData.message);
-              } else {
-                console.log('Login successful');
-                window.location.href = `/DailyQuestion/${dataToSend.email}`;
-              }
+                return;
+            }
+            console.log('Login successful');
+    
+            const email = userdata.email.toLowerCase();
+            const idResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/getUserId/${email}`);
+            if (!idResponse.ok) {
+                throw new Error('Failed to fetch user ID');
+            }
+            const data = await idResponse.json();
+            console.log(data.userId);
+    
+            // Redirect to the DailyQuestion page with the fetched user ID
+            window.location.href = `/DailyQuestion/${data.userId}`;
         } catch (error) {
-            alert(error.message)
-            console.log(error);
+            alert(error.message);
+            setError(error.message);
         }
-    }
+    };
+    
     console.log(userdata)
 
     return (

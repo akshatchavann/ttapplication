@@ -10,11 +10,13 @@ import CompletedPage from "./CompletedPage";
 
 const Content = () => {
     // Retrieve the 'id' parameter from the URL
-    const { email } = useParams();
+    const { id } = useParams();
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0); 
     
+
+
     useEffect(() => {
         const fetchQuestionsAndUserIndex = async () => {
             try {
@@ -27,10 +29,8 @@ const Content = () => {
                 const cleanData = cleanQuestionData(questionsData.questions)
 
                 setLoadedQuestion(cleanData);
-    
-    
                 // Fetch user's question index
-                const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+                const userResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/id/${id}`);
                 if (!userResponse.ok) {
                     throw new Error('Could not fetch user data');
                 }
@@ -38,12 +38,11 @@ const Content = () => {
                 let dbQuestionIndex = userData.user.questionindex;
     
                 if (dbQuestionIndex > cleanData.length) {
-                    console.log("sent")
+
                     // Update the user object with the new question index
                     const updatedUser = { ...userData.user, questionindex: cleanData.length };
-                    console.log(updatedUser)
                     
-                    const putResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/fullupdate/${email}`, {
+                    const putResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/fullupdate/${id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -55,8 +54,6 @@ const Content = () => {
                         throw new Error('Could not update user question index');
                     } else {
                         dbQuestionIndex = cleanData.length;
-                        console.log("updated")
-                        console.log(dbQuestionIndex)
                     }
                 }
     
@@ -67,12 +64,12 @@ const Content = () => {
         };
     
         fetchQuestionsAndUserIndex();
-    }, [email, setLoadedQuestion, setError]);
+    }, [setLoadedQuestion, setError]);
     
-      const handleNextClick = async () => {
+    const handleNextClick = async () => {
         try {
             // Make a GET request to fetch the current questionindex for the user
-            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/${email}`);
+            const response = await fetch(`https://ttapplication-backend.vercel.app/api/users/id/${id}`);
             if (!response.ok) {
                 throw new Error('Could not fetch question index');
             }
@@ -88,7 +85,7 @@ const Content = () => {
                 setCurrentIndex(currentIndex + 1);
     
                 // Send a PUT request to increment questionindex in the database
-                const updateResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/increasequestion/${email}`, {
+                const updateResponse = await fetch(`https://ttapplication-backend.vercel.app/api/users/increasequestion/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -101,7 +98,6 @@ const Content = () => {
     
                 // Optionally handle the response from the PUT request
                 const updateData = await updateResponse.json();
-                console.log(updateData.message);
             }
         } catch (error) {
             console.error('There was an error updating the question index: ', error);
@@ -129,7 +125,7 @@ const Content = () => {
         return { paddingTop: hasActiveLinks ? '200px' : '0px', height: '100px' };
     };
 
-
+    console.log(currentIndex)
     return (
 
         <div>

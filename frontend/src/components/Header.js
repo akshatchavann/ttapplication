@@ -7,7 +7,7 @@ import logo from "../assets/ThinkThrough.png";
 import { useParams } from 'react-router-dom';
 
 const Header = () => {
-    const { email } = useParams();
+    const { id } = useParams();
   return (
       <header className='header-container'>
       <div className="left-container">
@@ -21,21 +21,21 @@ const Header = () => {
       </div>
       <div className="right-container">
       <div className="button-container">
-                <Link className="nav-link" to={`/DailyQuestion/${email}`}>
+                <Link className="nav-link" to={`/DailyQuestion/${id}`}>
                     <button type="button" className="home-button">
                             Question of the Day
                     </button>
                 </Link>
             </div>
           <div className="button-container">
-              <Link className="nav-link" to={`/Content/${email}`}>
+              <Link className="nav-link" to={`/Content/${id}`}>
                   <button type="button" className="home-button">
                     More Topics
                   </button>
               </Link>
           </div>
           <div className="button-container">
-              <Link className="nav-link" to={`/Profile/${email}`}>
+              <Link className="nav-link" to={`/Profile/${id}`}>
                   <button type="button" className="home-button-yo">
                       Profile
                   </button>
