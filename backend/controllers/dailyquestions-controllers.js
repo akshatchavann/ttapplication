@@ -90,7 +90,7 @@ const deleteQuestionByID = async (req, res, next) => {
     const questionId = req.params.qid; // Get the ID from the request parameters
   
     try {
-        const question = await Question.findById(questionId);
+        const question = await dailyquestionSchema.findById(questionId);
         if (!question) {
             throw new HttpError('Could not find a question for the provided id.', 404);
         }
@@ -111,7 +111,7 @@ const deleteQuestionByID = async (req, res, next) => {
     category = category.split(',').map(cat => cat.trim());
     try {
         // Blind update: the request body is assumed to contain all the necessary fields
-        const updatedQuestion = await Question.findByIdAndUpdate(
+        const updatedQuestion = await dailyquestionSchema.findByIdAndUpdate(
             questionId,
             { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right, display, creator},
             { new: true, runValidators: true }
