@@ -63,7 +63,78 @@ const updateQuestionbyID = async (req, res, next) => {
     }
 };
 
+
+
+const deleteQuestionByID = async (req, res, next) => {
+    const questionId = req.params.qid;
+  
+    try {
+        const result = await dailyquestionSchema.deleteOne({ _id: questionId });
+  
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+  
+        res.status(200).json({ message: 'Question deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting question:', error);
+        res.status(500).json({ 
+            message: 'Failed to delete the question', 
+            error: error.message 
+        });
+    }
+  };
+
+
+  const getQuestionbyID = async (req, res, next) => {
+    const questionId = req.params.qid; // Get the ID from the request parameters
+  
+    try {
+        const question = await Question.findById(questionId);
+        if (!question) {
+            throw new HttpError('Could not find a question for the provided id.', 404);
+        }
+        res.json({ question: question.toObject({ getters: true }) }); // Convert to plain object and add `id` getter
+    } catch (error) {
+        const err = new HttpError(
+            'Something went wrong, could not find a question.',
+            500
+        );
+        return next(err);
+    }
+  };
+  
+  
+  const updateFullQuestionbyID = async (req, res, next) => {
+    const questionId = req.params.qid;
+    let { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right,display, creator } = req.body;
+    category = category.split(',').map(cat => cat.trim());
+    try {
+        // Blind update: the request body is assumed to contain all the necessary fields
+        const updatedQuestion = await Question.findByIdAndUpdate(
+            questionId,
+            { question, bio, category, tweetboolean, tweetURL, contentboolean, contentURL, left, mid, right, display, creator},
+            { new: true, runValidators: true }
+        );
+  
+        if (!updatedQuestion) {
+            throw new HttpError('Could not find a question for the provided id.', 404);
+        }
+  
+        res.status(200).json({ question: updatedQuestion.toObject({ getters: true }) });
+    } catch (error) {
+        const err = new HttpError(
+            'Something went wrong, could not update the question.',
+            500
+        );
+        return next(err);
+    }
+  };
+
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
 exports.updateQuestionbyID = updateQuestionbyID;
+exports.deleteQuestionByID = deleteQuestionByID;
+exports.getQuestionbyID = getQuestionbyID;
+exports.updateFullQuestionbyID = updateFullQuestionbyID;
 
