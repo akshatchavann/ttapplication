@@ -13,6 +13,9 @@ const AdminHome = () => {
         <Link to={`/AdminDailyQuestion`}>
             <button>Create Daily Questions</button>
         </Link>
+        <Link to={`/AdminDQ`}>
+            <button>Create Daily Questions</button>
+        </Link>
         <Link to={`/Admin`}>
             <button>Create Questions</button>
         </Link>

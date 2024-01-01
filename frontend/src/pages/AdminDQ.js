@@ -39,7 +39,7 @@ const AdminDQ = () => {
                 ))}
             </div>
             <Link to={`/AdminHome`}>
-                <button>Back to Admin Home</button>
+                <button>Back to Home</button>
             </Link>
         </div>
     );

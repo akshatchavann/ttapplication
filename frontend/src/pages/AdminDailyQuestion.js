@@ -192,9 +192,6 @@ const Admin = () => {
             </label>
             </div>
             <button type="submit" className='submitButton'>Submit</button>
-            <Link to={`/AdminPortal`}>
-                <button>See all Questions</button>
-            </Link>
             <Link to={`/AdminHome`}>
                 <button>Back to Admin Home</button>
             </Link>
