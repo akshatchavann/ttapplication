@@ -24,7 +24,7 @@ router.get('/getUserId/:email', usersControllers.getUserIdByEmail);
 
 router.get('/:uemail', usersControllers.getUserbyEmail);
 
-router.get('/:uid', usersControllers.getUserbyID);
+router.get('/:uid', usersControllers.getUserByID);
 
 
 
