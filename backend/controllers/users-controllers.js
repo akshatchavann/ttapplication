@@ -238,6 +238,26 @@ const getUserEmailById = async (req, res, next) => {
 };
 
 
+
+const getUserByID = async (req, res, next) => {
+  const userId = req.params.uid; // Retrieve the user ID from the URL parameter
+
+  try {
+      const user = await User.findById(userId).select('-password'); // Excluding the password for security
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.json({ user: user.toObject({ getters: true }) });
+  } catch (err) {
+      const error = new HttpError(
+          'Fetching user failed, please try again later.',
+          500
+      );
+      return next(error);
+  }
+};
   
 exports.fullUserUpdate = fullUserUpdate;
 exports.getUsers = getUsers;
@@ -248,3 +268,4 @@ exports.getUserbyEmail = getUserbyEmail;
 exports.increaseQuestionIndex = increaseQuestionIndex;
 exports.getUserIdByEmail = getUserIdByEmail;
 exports.getUserEmailById = getUserEmailById;
+exports.getUserByID = getUserByID;
