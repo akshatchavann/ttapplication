@@ -114,7 +114,7 @@ const DQquestion = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Alert the user that the update was successful
+                // Alert the user that the update was successful.
                 alert('Question updated successfully!');
             } else {
                 // Alert the user that there was an error with the update
