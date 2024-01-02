@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/DQquestion";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header'
