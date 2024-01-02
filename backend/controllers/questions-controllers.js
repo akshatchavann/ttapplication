@@ -1,6 +1,8 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 const Question = require('../models/questions-model');
+const User = require('../models/users-model');
+
 
 const getQuestions = async (req, res, next) => {
     try {
@@ -39,15 +41,20 @@ const updateQuestionbyID = async (req, res, next) => {
     const { questionId, userId, answer } = req.body; // Assuming you pass the user ID and their answer
 
     try {
-        const question = await Question.findOne({ _id: questionId });
+        // First, check if the user exists
+        const user = await User.findOne({ _id: userId });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
+        // Then, find the question
+        const question = await Question.findOne({ _id: questionId });
         if (!question) {
             return res.status(404).json({ message: 'Question not found' });
         }
 
         // Check if the user has already answered
         const existingAnswerIndex = question.answers.findIndex(a => a.userId.equals(userId));
-
         if (existingAnswerIndex !== -1) {
             // User has already answered, update their answer
             question.answers[existingAnswerIndex].answer = answer;
