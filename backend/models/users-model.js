@@ -7,7 +7,7 @@ const userSchema = new Schema({
     lastname: { type: String, required: true },
     phoneNumber: { type: Number, required: true },
     email: { type: String, required: true },
-    password: { type: String, required: true, minlength: 6 },
+    password: { type: String, required: true, minlength: 1 },
     questions: { type: Array, required: false },
     answers: { type: Array, required: false },
     QnA: [{
