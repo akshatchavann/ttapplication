@@ -187,7 +187,7 @@ const Profile = () => {
     
     const getProfileStyle = () => {
       const qnaLength = (ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length) || 0;
-      const multiplier = qnaLength < 7 ? 250 : 200;
+      const multiplier = qnaLength < 7 ? 200 : 250;
       const marginTopValue = qnaLength * multiplier;
     
       return { marginTop: marginTopValue + 'px' };
@@ -197,7 +197,7 @@ const Profile = () => {
   const findQuestionById = (questionId, questions) => {
       return questions.find(question => question._id === questionId);
   };
-  
+  console.log((ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length))
     return (
       <div>
         <Header />
