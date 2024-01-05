@@ -186,18 +186,35 @@ const Profile = () => {
     
     
     const getProfileStyle = () => {
-      const qnaLength = (ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length) || 0;
-      const multiplier = qnaLength < 7 ? 200 : 250;
-      const marginTopValue = qnaLength * multiplier;
+      // Check if ProfileInformation and ProfileInformation.QnA exist
+      if (!ProfileInformation || !ProfileInformation.QnA) {
+        return { marginTop: '0px' }; // Or any default value you prefer
+      }
+    
+      const qnaLength = ProfileInformation.QnA.length;
+      let count = 0;
+    
+      // Assuming questionsResponseData is defined and accessible
+      ProfileInformation.QnA.forEach(qnaItem => {
+        if (questionsResponseData.some(question => question._id === qnaItem.questionId)) {
+          count++;
+        }
+      });
+      console.log(count)
+    
+      const multiplier = count <= 7 ? 200 : 250;
+      const marginTopValue = count * multiplier;
     
       return { marginTop: marginTopValue + 'px' };
     };
+    
     
 
   const findQuestionById = (questionId, questions) => {
       return questions.find(question => question._id === questionId);
   };
   console.log((ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length))
+  console.log(questionsResponseData)
     return (
       <div>
         <Header />
@@ -221,24 +238,32 @@ const Profile = () => {
                           <div key={index}>
                               <p><strong>Question:</strong> {question.question}</p>
                               <p>
-                                  <strong>Your Answer:</strong> 
-                                  {qna.answer === "4" ? 'Skipped' : `${qna.answer} (Yellow Bar)`}
-                              </p>
+                                <strong>Your Answer:</strong> 
+                                {qna.answer === "4" ? 
+                                    <div>
+                                        <div style={{ marginTop: '70px' }}></div>
+                                        <div style={{ fontSize: 'larger' }} ><strong>Skipped</strong></div>
+                                        <div style={{ marginTop: '70px' }}><>---------------------------------------------------</></div>
+                                    </div>
+                                    : 
+                                    `${qna.answer} (Yellow Bar)`
+                                }
+                            </p>
 
-                              {qna.answer !== "4" && (
-                                  <>
-                                      <div className="chart-container">
-                                          <Bar data={generateChartData(adjarray, String(qna.answer), allAnswerChoices)} />
-                                      </div>
-                                      <div className="label-container">
-                                          <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
-                                      </div>
+                            {qna.answer !== "4" && (
+                                <>
+                                    <div className="chart-container">
+                                        <Bar data={generateChartData(adjarray, String(qna.answer), allAnswerChoices)} />
+                                    </div>
+                                    <div className="label-container">
+                                        <div>{leftLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{rightLabel}</div>
+                                    </div>
 
-                                      <div style={{ height: '10px' }}></div>
-                                      <>---------------------------------------------------</>
-                                  </>
-                              )}
-</div>
+                                    <div style={{ height: '10px' }}></div>
+                                    <>---------------------------------------------------</>
+                                </>
+                            )}
+                          </div>
                       );
                   })
               }
