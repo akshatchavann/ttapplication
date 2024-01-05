@@ -186,11 +186,13 @@ const Profile = () => {
     
     
     const getProfileStyle = () => {
-      const muilt = ((ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length) || 0) * 200;
-      
-        return { marginTop: muilt + 'px' };
-
+      const qnaLength = (ProfileInformation && ProfileInformation.QnA && ProfileInformation.QnA.length) || 0;
+      const multiplier = qnaLength < 7 ? 250 : 200;
+      const marginTopValue = qnaLength * multiplier;
+    
+      return { marginTop: marginTopValue + 'px' };
     };
+    
 
   const findQuestionById = (questionId, questions) => {
       return questions.find(question => question._id === questionId);
