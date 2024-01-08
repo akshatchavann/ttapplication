@@ -128,13 +128,13 @@ const Question = () => {
         }
         };
 
-    const handleDelete = async () => {
+    const handleHide = async () => {
         if (formData.password !== 'asdfAc12345') {
             setError('Invalid password');
             return;
         }
 
-        const confirmDelete = window.confirm('Are you sure you want to delete this question?');
+        const confirmDelete = window.confirm('Are you sure you want to hide this question?');
         if (confirmDelete) {
             const body2 = JSON.stringify({
                 question: formData.question,
@@ -178,7 +178,40 @@ const Question = () => {
             };
     };
 
+    const handleDelete = async () => {
+        if (formData.password !== 'asdfAc12345') {
+            setError('Invalid password');
+            return;
+        }
 
+        const confirmDelete = window.confirm('Are you sure you want to delete this question?');
+        if (confirmDelete) {
+            try {
+                // Send a DELETE request with the form data
+                const response = await fetch(`https://ttapplication-backend.vercel.app/api/questions/delete/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Include any other headers your API expects, such as authentication tokens
+                    },
+                });
+    
+                const data = await response.json();
+    
+                if (response.ok) {
+                    // Alert the user that the update was successful
+                    alert('Question deleted successfully!');
+                } else {
+                    // Alert the user that there was an error with the update
+                    alert(data.message || 'Failed to delete the question.');
+                }
+            } catch (error) {
+                // If there is an error, log it and set the error state
+                console.error('Error deleting question:', error);
+                setError('Failed to delete the question.');
+            }
+            };
+    }
 
     return (
     <div>
@@ -331,6 +364,7 @@ const Question = () => {
             </Link>
         </div>
     </form>
+    <button onClick={handleHide}>Hide</button>
     <button onClick={handleDelete}>Delete</button>
 
       
