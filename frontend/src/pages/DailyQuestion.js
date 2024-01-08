@@ -44,7 +44,7 @@ const DailyQuestion = () => {
 
         <div>
             <Header />
-            <div style={{ height: '10px' }}></div>
+            <div style={{ height: '50px' }}></div>
             <div className="dq-title">Question of the Day</div>
 
             
