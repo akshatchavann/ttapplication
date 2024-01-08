@@ -211,15 +211,7 @@ const DQCard = (props) => {
                             <span></span>
                             <span>{question.right}</span>
                         </div>                
-                        <div className="slider-labels">
-                            <span> -3</span>
-                            <span>-2</span>
-                            <span>-1</span>
-                            <span>0</span>
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                        </div>
+
 
 
                         <div>
