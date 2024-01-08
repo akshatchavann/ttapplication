@@ -11,5 +11,6 @@ router.put('/update', dailyquestionsControllers.updateQuestionbyID);
 router.delete('/delete/:qid', dailyquestionsControllers.deleteQuestionByID);
 router.get('/:qid', dailyquestionsControllers.getQuestionbyID);
 router.put('/update/:qid', dailyquestionsControllers.updateFullQuestionbyID);
+router.delete('/delete/:qid', dailyquestionsControllers.PermDelete);
 
 module.exports = router;

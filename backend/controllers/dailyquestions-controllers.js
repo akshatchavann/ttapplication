@@ -139,10 +139,34 @@ const deleteQuestionByID = async (req, res, next) => {
     }
   };
 
+
+
+const PermDelete = async (req, res, next) => {
+    const questionId = req.params.qid;
+  
+    try {
+        const result = await dailyquestionSchema.deleteOne({ _id: questionId });
+  
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+  
+        res.status(200).json({ message: 'Question deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting question:', error);
+        res.status(500).json({ 
+            message: 'Failed to delete the question', 
+            error: error.message 
+        });
+    }
+  };
+
+
 exports.getQuestions = getQuestions;
 exports.createQuestion = createQuestion;
 exports.updateQuestionbyID = updateQuestionbyID;
 exports.deleteQuestionByID = deleteQuestionByID;
 exports.getQuestionbyID = getQuestionbyID;
 exports.updateFullQuestionbyID = updateFullQuestionbyID;
+exports.PermDelete = PermDelete;
 
