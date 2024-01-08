@@ -12,7 +12,6 @@ const DailyQuestion = () => {
     const { id } = useParams();
     const [loadedQuestion, setLoadedQuestion] = useState();
     const [error, setError] = useState(null);
-    const [email, setEmail] = useState('');
 
 
 
@@ -34,7 +33,7 @@ const DailyQuestion = () => {
         };
     
         fetchQuestionsAndUserIndex();
-    }, [email, setLoadedQuestion, setError]);
+    }, [setLoadedQuestion, setError]);
 
     const cleanQuestionData = (questionsArray) => {
         return questionsArray.filter(question => question.display === true);
@@ -45,6 +44,7 @@ const DailyQuestion = () => {
 
         <div>
             <Header />
+            <div style={{ height: '10px' }}></div>
             <div className="dq-title">Question of the Day</div>
 
             
